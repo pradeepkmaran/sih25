@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('./models/user'); // adjust path if needed
+const User = require('../models/user'); // adjust path if needed
 const dotenv = require('dotenv');
 dotenv.config(); // <-- Load env variables before using them
 

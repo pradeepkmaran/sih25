@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Employee = require('./models/employee');
-const Branch = require('./models/branch');
-const Department = require('./models/department');
+const Employee = require('../models/employee');
+const Branch = require('../models/branch');
+const Department = require('../models/department');
 
 dotenv.config();
 

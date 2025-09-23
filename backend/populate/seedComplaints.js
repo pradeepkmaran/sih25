@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const Complaint = require('./models/complaint');
-const Branch = require('./models/branch');
-const Department = require('./models/department');
-const User = require('./models/user');
+const Complaint = require('../models/complaint');
+const Branch = require('../models/branch');
+const Department = require('../models/department');
+const User = require('../models/user');
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,

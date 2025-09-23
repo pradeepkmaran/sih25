@@ -1,3 +1,4 @@
+
 // TANGEDCO Electrical Complaint Management System - JavaScript
 
 class ElectricalComplaintApp {
@@ -260,18 +261,58 @@ class ElectricalComplaintApp {
         this.init();
     }
 
+    async fetchAllDataFromAPI() {
+        try {
+            // Complaints
+            const complaintsRes = await fetch('http://localhost:3000/api/complaints');
+            if (!complaintsRes.ok) throw new Error('Failed to fetch complaints');
+            this.data.complaints = await complaintsRes.json();
+
+            // Staff
+            const staffRes = await fetch('http://localhost:3000/api/staff');
+            if (staffRes.ok) {
+                this.data.staff = await staffRes.json();
+            }
+
+            // Infrastructure
+            const infraRes = await fetch('http://localhost:3000/api/infrastructure');
+            if (infraRes.ok) {
+                this.data.infrastructure = await infraRes.json();
+            }
+
+            // Performance
+            const perfRes = await fetch('http://localhost:3000/api/performance');
+            if (perfRes.ok) {
+                this.data.performance = await perfRes.json();
+            }
+
+            // Emergency Contacts
+            const contactsRes = await fetch('http://localhost:3000/api/emergencyContacts');
+            if (contactsRes.ok) {
+                this.data.emergencyContacts = await contactsRes.json();
+            }
+
+            // Re-render UI with new data
+            this.renderElectricalComplaints();
+            this.updateRoleSpecificData();
+            this.setupElectricalCharts();
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
     init() {
+        this.fetchAllDataFromAPI();
+
         this.setupEventListeners();
         this.updateHeader();
         this.renderElectricalComplaints();
         this.startRealTimeUpdates();
         
-        // Initialize charts after DOM is ready
         setTimeout(() => {
             this.setupElectricalCharts();
         }, 500);
         
-        // Show role switcher
         this.showRoleSwitcher();
         
         console.log('TANGEDCO Electrical Complaint Management System initialized');
@@ -298,7 +339,7 @@ class ElectricalComplaintApp {
         document.addEventListener('click', (e) => {
             this.handleGlobalClick(e);
         });
-
+        
         // Search functionality
         const searchInput = document.getElementById('complaintSearch');
         if (searchInput) {
@@ -535,12 +576,6 @@ class ElectricalComplaintApp {
             case 'localCommunication':
                 this.updateWhatsAppStats();
                 break;
-            case 'deptCommunication':
-                this.updateWhatsAppStats();
-                break;
-            case 'centralCommunication':
-                this.updateWhatsAppStats();
-                break;
             case 'localProfile':
                 this.updateEngineerProfile();
                 break;
@@ -571,62 +606,47 @@ class ElectricalComplaintApp {
     }
 
     renderElectricalComplaints() {
-        const container = document.getElementById('allComplaints');
-        if (!container) return;
-        
-        container.innerHTML = '';
-        
-        this.data.complaints.forEach(complaint => {
-            const complaintCard = this.createElectricalComplaintCard(complaint, true);
-            container.appendChild(complaintCard);
-        });
-    }
+    const tbody = document.getElementById('complaintsTableBody');
+    if (!tbody) return;
 
-    createElectricalComplaintCard(complaint, detailed = false) {
-        const card = document.createElement('div');
-        card.className = `complaint-card electrical priority-${complaint.priority.toLowerCase()}`;
-        card.dataset.complaintId = complaint.id;
-        
-        const timeAgo = this.getTimeAgo(complaint.createdDate);
-        const statusClass = this.getElectricalStatusClass(complaint.status);
-        
-        // Enhanced electrical information
-        let electricalDetails = '';
-        if (complaint.transformerNumber) {
-            electricalDetails += `<span><i class="fas fa-bolt"></i> ${complaint.transformerNumber}</span>`;
-        }
-        if (complaint.poleNumber) {
-            electricalDetails += `<span><i class="fas fa-lightbulb"></i> Pole ${complaint.poleNumber}</span>`;
-        }
-        if (complaint.meterNumber) {
-            electricalDetails += `<span><i class="fas fa-tachometer-alt"></i> Meter ${complaint.meterNumber}</span>`;
-        }
-        if (complaint.affectedConsumers) {
-            electricalDetails += `<span><i class="fas fa-users"></i> ${complaint.affectedConsumers} affected</span>`;
-        }
-        
-        card.innerHTML = `
-            <div class="complaint-header">
-                <div class="complaint-id">${complaint.id}</div>
-                <div class="complaint-priority">${complaint.priority}</div>
-            </div>
-            <h4>${complaint.title}</h4>
-            <p>${complaint.description}</p>
-            <div class="complaint-meta">
-                <span><i class="fas fa-map-marker-alt"></i> ${complaint.location}</span>
-                <span><i class="fas fa-clock"></i> ${timeAgo}</span>
-                <span><i class="fas fa-thumbs-up"></i> ${complaint.upvotes} upvotes</span>
-                ${electricalDetails}
-            </div>
-            <div class="complaint-status">
-                <span class="status ${statusClass}">${complaint.status}</span>
-                ${complaint.workOrderNumber ? `<span class="work-order">${complaint.workOrderNumber}</span>` : ''}
-            </div>
-            ${detailed ? this.createElectricalComplaintActions(complaint) : ''}
-        `;
-        
-        return card;
-    }
+    tbody.innerHTML = ''; 
+
+    this.data.complaints.forEach(complaint => {
+        const row = this.createElectricalComplaintRow(complaint);
+        tbody.appendChild(row);
+    });
+}
+
+createElectricalComplaintRow(complaint) {
+    const row = document.createElement('tr');
+    row.className = `complaint-row electrical priority-${complaint.priority.toLowerCase()}`;
+    row.dataset.complaintId = complaint.id;
+
+    const timeAgo = this.getTimeAgo(complaint.createdDate);
+    const statusClass = this.getElectricalStatusClass(complaint.status);
+
+    row.innerHTML = `
+        <td class="complaint-id">${complaint.id}</td>
+        <td class="complaint-issue">
+            <strong>${complaint.title}</strong>
+            <br><small>${complaint.description}</small>
+        </td>
+        <td>
+            <i class="fas fa-map-marker-alt"></i> ${complaint.location}
+            <br><small>${timeAgo}</small>
+        </td>
+        <td><span class="category-tag ${complaint.category.toLowerCase()}">${complaint.category}</span></td>
+        <td><span class="priority-badge ${complaint.priority.toLowerCase()}">${complaint.priority}</span></td>
+        <td><span class="status ${statusClass}">${complaint.status}</span></td>
+        <td>
+            <button class="btn btn--sm btn--primary">Assign</button>
+            <button class="btn btn--sm btn--outline">View</button>
+        </td>
+    `;
+
+    return row;
+}
+
 
     createElectricalComplaintActions(complaint) {
         return `
@@ -814,9 +834,9 @@ class ElectricalComplaintApp {
             const complaintId = card.querySelector('.complaint-id')?.textContent.toLowerCase() || '';
             
             const matches = title.includes(searchTerm.toLowerCase()) ||
-                           description.includes(searchTerm.toLowerCase()) ||
-                           location.includes(searchTerm.toLowerCase()) ||
-                           complaintId.includes(searchTerm.toLowerCase());
+                            description.includes(searchTerm.toLowerCase()) ||
+                            location.includes(searchTerm.toLowerCase()) ||
+                            complaintId.includes(searchTerm.toLowerCase());
             
             card.style.display = matches ? 'block' : 'none';
         });
@@ -1622,7 +1642,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Add touch gesture support for mobile
+// // Add touch gesture support for mobile
 // let touchStartX = 0;
 // let touchStartY = 0;
 
@@ -1630,6 +1650,32 @@ document.addEventListener('keydown', (e) => {
 //     touchStartX = e.touches[0].clientX;
 //     touchStartY = e.touches[0].clientY;
 // });
+// document.addEventListener("DOMContentLoaded", () => {
+//   const toggleButtons = document.querySelectorAll(".map-toggle-btn");
+//   const streetView = document.getElementById("streetMapView");
+//   const densityView = document.getElementById("densityMapView");
+
+//   toggleButtons.forEach(btn => {
+//     btn.addEventListener("click", () => {
+//       // Remove active state from all buttons
+//       toggleButtons.forEach(b => b.classList.remove("active"));
+
+//       // Mark clicked button active
+//       btn.classList.add("active");
+
+//       // Switch views based on data-view attribute
+//       const view = btn.dataset.view;
+//       if (view === "street") {
+//         streetView.classList.add("active");
+//         densityView.classList.remove("active");
+//       } else if (view === "density") {
+//         densityView.classList.add("active");
+//         streetView.classList.remove("active");
+//       }
+//     });
+//   });
+// });
+
 
 // document.addEventListener('touchend', (e) => {
 //     if (!touchStartX || !touchStartY) return;
@@ -1686,6 +1732,7 @@ emergencyStyles.textContent = `
         opacity: 1;
     }
 }
+
 
 .emergency-notification {
     animation: slideIn 0.3s ease-out;

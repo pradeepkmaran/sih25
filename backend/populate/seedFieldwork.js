@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const Fieldwork = require('./models/fieldwork');
-const Complaint = require('./models/complaint');
-const Employee = require('./models/employee');
+const Fieldwork = require('../models/fieldwork');
+const Complaint = require('../models/complaint');
+const Employee = require('../models/employee');
 
 dotenv.config();
 

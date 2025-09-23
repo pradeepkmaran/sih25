@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Branch = require('./models/branch');       // adjust path
-const Department = require('./models/departments'); // adjust path
+const Branch = require('../models/branch');       // adjust path
+const Department = require('../models/departments'); // adjust path
 const dotenv = require('dotenv');
 dotenv.config(); // <-- Load env variables before using them
 
