@@ -74,49 +74,186 @@
                         <div class="stat-icon"><i class="fas fa-clock"></i></div>
                     </div>
                 </div>
+                <div class="map-dashboard-section">
+                    <div class="section-header">
+                        <h3>T Nagar Area Status Map</h3>
+                        <div class="map-controls">
+                            <button class="map-toggle-btn active" data-view="street">Street View</button>
+                            <button class="map-toggle-btn" data-view="density">Density View</button>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-map-container">
+                        <!-- Street Map View -->
+                        <div class="dashboard-map-view active" id="streetMapView">
+                            <div class="map-canvas">
+                                <!-- Main Roads -->
+                                <div class="map-road main-road horizontal" style="top: 35%; height: 8px;"></div>
+                                <div class="map-road secondary-road horizontal" style="top: 55%; height: 6px;"></div>
+                                <div class="map-road secondary-road horizontal" style="top: 75%; height: 6px;"></div>
+                                <div class="map-road main-road vertical" style="left: 25%; width: 8px;"></div>
+                                <div class="map-road secondary-road vertical" style="left: 65%; width: 6px;"></div>
 
+                                <!-- Area Labels -->
+                                <div class="area-label main" style="top: 28%; left: 8%;">Pondy Bazaar</div>
+                                <div class="area-label" style="top: 48%; left: 8%;">Ranganathan Street</div>
+                                <div class="area-label" style="top: 68%; left: 8%;">Usman Road</div>
+                                <div class="area-label vertical" style="top: 8%; left: 18%;">GN Chetty Road</div>
+                                <div class="area-label vertical" style="top: 8%; left: 58%;">Habibullah Road</div>
+
+                                <!-- Buildings/Blocks -->
+                                <div class="building-block" style="top: 20%; left: 35%; width: 25%; height: 12%;"></div>
+                                <div class="building-block" style="top: 40%; left: 35%; width: 25%; height: 12%;"></div>
+                                <div class="building-block" style="top: 60%; left: 35%; width: 25%; height: 12%;"></div>
+                                <div class="building-block" style="top: 40%; left: 70%; width: 25%; height: 15%;"></div>
+
+                                <!-- Infrastructure -->
+                                <div class="infrastructure-item transformer critical" style="top: 52%; left: 47%;" data-tooltip="T-NG-15 - Overloaded - 120 consumers">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="infrastructure-item transformer normal" style="top: 32%; left: 72%;" data-tooltip="T-NG-23 - Normal Operation">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+                                <div class="infrastructure-item transformer maintenance" style="top: 72%; left: 22%;" data-tooltip="T-NG-08 - Scheduled Maintenance">
+                                    <i class="fas fa-bolt"></i>
+                                </div>
+
+                                <!-- Street Lights -->
+                                <div class="infrastructure-item streetlight broken" style="top: 37%; left: 75%;" data-tooltip="Pole PB-45 - LED Bulb Damaged">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="infrastructure-item streetlight working" style="top: 57%; left: 30%;" data-tooltip="Street Light - Working">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="infrastructure-item streetlight working" style="top: 77%; left: 50%;" data-tooltip="Street Light - Working">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+
+                                <!-- Complaint Markers -->
+                                <div class="complaint-pin critical" style="top: 52%; left: 47%;" data-tooltip="TNE2025002 - Power Cuts - Critical">
+                                    <div class="pin-head"></div>
+                                    <div class="pin-point"></div>
+                                </div>
+                                <div class="complaint-pin high" style="top: 37%; left: 75%;" data-tooltip="TNE2025001 - Street Light - High Priority">
+                                    <div class="pin-head"></div>
+                                    <div class="pin-point"></div>
+                                </div>
+                                <div class="complaint-pin medium" style="top: 72%; left: 82%;" data-tooltip="TNE2025003 - Voltage Issues - Medium">
+                                    <div class="pin-head"></div>
+                                    <div class="pin-point"></div>
+                                </div>
+                                <div class="complaint-pin resolved" style="top: 27%; left: 40%;" data-tooltip="TNE2025005 - Cable Spark - Resolved">
+                                    <div class="pin-head"></div>
+                                    <div class="pin-point"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Density Map View -->
+                        <div class="dashboard-map-view" id="densityMapView">
+                            <div class="density-canvas">
+                                <!-- Base Map with subtle roads -->
+                                <div class="density-road horizontal" style="top: 35%; height: 3px;"></div>
+                                <div class="density-road horizontal" style="top: 55%; height: 3px;"></div>
+                                <div class="density-road horizontal" style="top: 75%; height: 3px;"></div>
+                                <div class="density-road vertical" style="left: 25%; width: 3px;"></div>
+                                <div class="density-road vertical" style="left: 65%; width: 3px;"></div>
+
+                                <!-- Density Heat Zones -->
+                                <div class="density-zone critical-zone" style="top: 40%; left: 35%; width: 130px; height: 130px;"></div>
+                                <div class="density-zone high-zone" style="top: 25%; left: 65%; width: 90px; height: 90px;"></div>
+                                <div class="density-zone medium-zone" style="top: 65%; left: 75%; width: 80px; height: 80px;"></div>
+                                <div class="density-zone low-zone" style="top: 15%; left: 15%; width: 70px; height: 70px;"></div>
+                                <div class="density-zone low-zone" style="top: 70%; left: 10%; width: 75px; height: 75px;"></div>
+
+                                <!-- Area Labels on Density Map -->
+                                <div class="density-label" style="top: 28%; left: 8%;">Pondy Bazaar</div>
+                                <div class="density-label" style="top: 48%; left: 8%;">Ranganathan St.</div>
+                                <div class="density-label" style="top: 68%; left: 8%;">Usman Road</div>
+                            </div>
+
+                            <!-- Density Legend -->
+                            <div class="density-legend">
+                                <div class="legend-title">Issue Density</div>
+                                <div class="legend-item">
+                                    <div class="legend-indicator critical"></div>
+                                    <span>Critical (3+ active)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-indicator high"></div>
+                                    <span>High (2-3 issues)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-indicator medium"></div>
+                                    <span>Medium (1-2 issues)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-indicator low"></div>
+                                    <span>Low (0-1 issues)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Map Tooltip -->
+                        <div class="map-tooltip" id="mapTooltip"></div>
+                    </div>
+                </div>   
                 <div class="section-title">
                     <h3>Priority Electrical Complaints</h3>
                     <button class="btn btn--sm btn--outline">View All</button>
                 </div>
 
-                <div class="complaint-list" id="priorityComplaints">
-                    <div class="complaint-card priority-high electrical">
-                        <div class="complaint-header">
-                            <div class="complaint-id">TNE2025002</div>
-                            <div class="complaint-priority">Critical</div>
-                        </div>
-                        <h4>Power Cuts - Ranganathan Street</h4>
-                        <p>Transformer T-NG-15 overloading during peak hours. 120 consumers affected.</p>
-                        <div class="complaint-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> Near Naidu Hall</span>
-                            <span><i class="fas fa-clock"></i> 2 days ago</span>
-                            <span><i class="fas fa-thumbs-up"></i> 67 upvotes</span>
-                            <span><i class="fas fa-users"></i> 120 affected</span>
-                        </div>
-                        <div class="complaint-status">
-                            <span class="status status--warning">In Progress</span>
-                            <span class="work-order">WO/TNE/2025/0046</span>
-                        </div>
-                    </div>
-
-                    <div class="complaint-card priority-high electrical">
-                        <div class="complaint-header">
-                            <div class="complaint-id">TNE2025001</div>
-                            <div class="complaint-priority">High</div>
-                        </div>
-                        <h4>Street Light Not Working - Pondy Bazaar</h4>
-                        <p>LED bulb damaged in pole PB-45. Safety issues for evening shoppers.</p>
-                        <div class="complaint-meta">
-                            <span><i class="fas fa-lightbulb"></i> Pole PB-45</span>
-                            <span><i class="fas fa-clock"></i> 4 days ago</span>
-                            <span><i class="fas fa-thumbs-up"></i> 23 upvotes</span>
-                        </div>
-                        <div class="complaint-status">
-                            <span class="status status--info">Work Order Issued</span>
-                            <span class="work-order">WO/TNE/2025/0045</span>
-                        </div>
-                    </div>
+                <!-- UPDATED: TABLE STRUCTURE FOR COMPLAINTS -->
+                <div class="complaint-table-container" id="priorityComplaints">
+                    <table class="complaint-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Issue</th>
+                                <th>Location</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th>Work Order</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="complaint-row priority-critical">
+                                <td class="complaint-id">TNE2025002</td>
+                                <td class="complaint-issue">
+                                    <strong>Power Cuts - Ranganathan Street</strong>
+                                    <br><small>Transformer T-NG-15 overloading. 120 consumers affected</small>
+                                </td>
+                                <td>
+                                    <i class="fas fa-map-marker-alt"></i> Near Naidu Hall
+                                    <br><small>2 days ago</small>
+                                </td>
+                                <td><span class="priority-badge critical">Critical</span></td>
+                                <td><span class="status status--warning">In Progress</span></td>
+                                <td class="work-order">WO/TNE/2025/0046</td>
+                                <td>
+                                    <button class="btn btn--sm btn--primary">Update</button>
+                                </td>
+                            </tr>
+                            <tr class="complaint-row priority-high">
+                                <td class="complaint-id">TNE2025001</td>
+                                <td class="complaint-issue">
+                                    <strong>Street Light Not Working - Pondy Bazaar</strong>
+                                    <br><small>LED bulb damaged in pole PB-45</small>
+                                </td>
+                                <td>
+                                    <i class="fas fa-lightbulb"></i> Pole PB-45
+                                    <br><small>4 days ago</small>
+                                </td>
+                                <td><span class="priority-badge high">High</span></td>
+                                <td><span class="status status--info">Work Order Issued</span></td>
+                                <td class="work-order">WO/TNE/2025/0045</td>
+                                <td>
+                                    <button class="btn btn--sm btn--outline">View</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <div class="recent-activity">
@@ -148,6 +285,8 @@
             </div>
 
             <!-- Electrical Complaints -->
+            
+            <!-- Electrical Complaints -->
             <div class="page" id="localComplaints">
                 <div class="page-header">
                     <h2>Electrical Complaints</h2>
@@ -178,9 +317,25 @@
                     </select>
                 </div>
 
-                <div class="complaint-list detailed" id="allComplaints">
-                    <!-- Electrical complaints will be populated by JavaScript -->
-                </div>
+                <!-- UPDATED: TABLE STRUCTURE FOR ALL COMPLAINTS -->
+                <div class="complaint-table-container detailed" id="allComplaints">
+  <table class="complaint-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Issue & Description</th>
+        <th>Location & Time</th>
+        <th>Category</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="complaintsTableBody">
+      <!-- JS will insert rows here -->
+    </tbody>
+  </table>
+</div>
             </div>
 
             <!-- Field Work -->
@@ -205,45 +360,83 @@
                     </div>
                 </div>
 
+                <!-- UPDATED: TABLE STRUCTURE FOR WORK ORDERS -->
                 <div class="work-orders">
                     <h3>Today's Work Orders</h3>
-                    <div class="work-order-list">
-                        <div class="work-order-card emergency">
-                            <div class="work-order-header">
-                                <div class="work-order-id">WO/TNE/2025/0046</div>
-                                <div class="work-order-priority">Emergency</div>
-                            </div>
-                            <h4>Transformer Overload - Ranganathan Street</h4>
-                            <div class="work-order-details">
-                                <span><i class="fas fa-map-marker-alt"></i> T-NG-15, Near Naidu Hall</span>
-                                <span><i class="fas fa-user"></i> AE Ramesh Kumar</span>
-                                <span><i class="fas fa-clock"></i> In Progress</span>
-                            </div>
-                            <div class="work-order-actions">
-                                <button class="btn btn--sm btn--primary">Update Status</button>
-                                <button class="btn btn--sm btn--outline">View Details</button>
-                            </div>
-                        </div>
-
-                        <div class="work-order-card high">
-                            <div class="work-order-header">
-                                <div class="work-order-id">WO/TNE/2025/0045</div>
-                                <div class="work-order-priority">High</div>
-                            </div>
-                            <h4>Street Light Repair - Pondy Bazaar</h4>
-                            <div class="work-order-details">
-                                <span><i class="fas fa-lightbulb"></i> Pole PB-45</span>
-                                <span><i class="fas fa-user"></i> AE Subramanian</span>
-                                <span><i class="fas fa-clock"></i> Scheduled</span>
-                            </div>
-                            <div class="work-order-actions">
-                                <button class="btn btn--sm btn--primary">Start Work</button>
-                                <button class="btn btn--sm btn--outline">View Details</button>
-                            </div>
-                        </div>
+                    <div class="work-order-table-container">
+                        <table class="work-order-table">
+                            <thead>
+                                <tr>
+                                    <th>Work Order ID</th>
+                                    <th>Task & Details</th>
+                                    <th>Location</th>
+                                    <th>Assigned To</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="work-order-row emergency">
+                                    <td class="work-order-id">WO/TNE/2025/0046</td>
+                                    <td class="work-order-task">
+                                        <strong>Transformer Overload - Ranganathan Street</strong>
+                                        <br><small>Load balancing required urgently for T-NG-15</small>
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-map-marker-alt"></i> T-NG-15, Near Naidu Hall
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-user"></i> AE Ramesh Kumar
+                                    </td>
+                                    <td><span class="priority-badge emergency">Emergency</span></td>
+                                    <td><span class="status status--warning">In Progress</span></td>
+                                    <td>
+                                        <button class="btn btn--sm btn--primary">Update</button>
+                                        <button class="btn btn--sm btn--outline">Details</button>
+                                    </td>
+                                </tr>
+                                <tr class="work-order-row high">
+                                    <td class="work-order-id">WO/TNE/2025/0045</td>
+                                    <td class="work-order-task">
+                                        <strong>Street Light Repair - Pondy Bazaar</strong>
+                                        <br><small>LED bulb replacement needed for pole PB-45</small>
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-lightbulb"></i> Pole PB-45
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-user"></i> AE Subramanian
+                                    </td>
+                                    <td><span class="priority-badge high">High</span></td>
+                                    <td><span class="status status--info">Scheduled</span></td>
+                                    <td>
+                                        <button class="btn btn--sm btn--primary">Start</button>
+                                        <button class="btn btn--sm btn--outline">Details</button>
+                                    </td>
+                                </tr>
+                                <tr class="work-order-row medium">
+                                    <td class="work-order-id">WO/TNE/2025/0047</td>
+                                    <td class="work-order-task">
+                                        <strong>Cable Maintenance - Habibullah Road</strong>
+                                        <br><small>Routine inspection and testing of underground cables</small>
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-plug"></i> Habibullah Road Junction
+                                    </td>
+                                    <td>
+                                        <i class="fas fa-user"></i> Technician Team A
+                                    </td>
+                                    <td><span class="priority-badge medium">Medium</span></td>
+                                    <td><span class="status status--success">Completed</span></td>
+                                    <td>
+                                        <button class="btn btn--sm btn--outline">Report</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
                 <div class="equipment-tracking">
                     <h3>Equipment & Materials</h3>
                     <div class="equipment-grid">
@@ -644,7 +837,7 @@
                         </div>
                         <div class="map-overlay">
                             <p>Chennai EDC Coverage Area</p>
-                            <small>Electrical complaint density heatmap</small>
+                            <p>Electrical complaint density heatmap</p>
                         </div>
                     </div>
                 </div>
@@ -1396,7 +1589,7 @@ class ElectricalComplaintApp {
     init() {
         this.setupEventListeners();
         this.updateHeader();
-        this.renderElectricalComplaints();
+    this.renderElectricalComplaints();
         this.startRealTimeUpdates();
         
         // Initialize charts after DOM is ready
@@ -1431,7 +1624,7 @@ class ElectricalComplaintApp {
         document.addEventListener('click', (e) => {
             this.handleGlobalClick(e);
         });
-
+        
         // Search functionality
         const searchInput = document.getElementById('complaintSearch');
         if (searchInput) {
@@ -1698,62 +1891,47 @@ class ElectricalComplaintApp {
     }
 
     renderElectricalComplaints() {
-        const container = document.getElementById('allComplaints');
-        if (!container) return;
-        
-        container.innerHTML = '';
-        
-        this.data.complaints.forEach(complaint => {
-            const complaintCard = this.createElectricalComplaintCard(complaint, true);
-            container.appendChild(complaintCard);
-        });
-    }
+    const tbody = document.getElementById('complaintsTableBody');
+    if (!tbody) return;
 
-    createElectricalComplaintCard(complaint, detailed = false) {
-        const card = document.createElement('div');
-        card.className = `complaint-card electrical priority-${complaint.priority.toLowerCase()}`;
-        card.dataset.complaintId = complaint.id;
-        
-        const timeAgo = this.getTimeAgo(complaint.createdDate);
-        const statusClass = this.getElectricalStatusClass(complaint.status);
-        
-        // Enhanced electrical information
-        let electricalDetails = '';
-        if (complaint.transformerNumber) {
-            electricalDetails += `<span><i class="fas fa-bolt"></i> ${complaint.transformerNumber}</span>`;
-        }
-        if (complaint.poleNumber) {
-            electricalDetails += `<span><i class="fas fa-lightbulb"></i> Pole ${complaint.poleNumber}</span>`;
-        }
-        if (complaint.meterNumber) {
-            electricalDetails += `<span><i class="fas fa-tachometer-alt"></i> Meter ${complaint.meterNumber}</span>`;
-        }
-        if (complaint.affectedConsumers) {
-            electricalDetails += `<span><i class="fas fa-users"></i> ${complaint.affectedConsumers} affected</span>`;
-        }
-        
-        card.innerHTML = `
-            <div class="complaint-header">
-                <div class="complaint-id">${complaint.id}</div>
-                <div class="complaint-priority">${complaint.priority}</div>
-            </div>
-            <h4>${complaint.title}</h4>
-            <p>${complaint.description}</p>
-            <div class="complaint-meta">
-                <span><i class="fas fa-map-marker-alt"></i> ${complaint.location}</span>
-                <span><i class="fas fa-clock"></i> ${timeAgo}</span>
-                <span><i class="fas fa-thumbs-up"></i> ${complaint.upvotes} upvotes</span>
-                ${electricalDetails}
-            </div>
-            <div class="complaint-status">
-                <span class="status ${statusClass}">${complaint.status}</span>
-                ${complaint.workOrderNumber ? `<span class="work-order">${complaint.workOrderNumber}</span>` : ''}
-            </div>
-            ${detailed ? this.createElectricalComplaintActions(complaint) : ''}
-        `;
-        
-        return card;
-    }
+    tbody.innerHTML = ''; // clear existing rows
+
+    this.data.complaints.forEach(complaint => {
+        const row = this.createElectricalComplaintRow(complaint);
+        tbody.appendChild(row);
+    });
+}
+
+createElectricalComplaintRow(complaint) {
+    const row = document.createElement('tr');
+    row.className = `complaint-row electrical priority-${complaint.priority.toLowerCase()}`;
+    row.dataset.complaintId = complaint.id;
+
+    const timeAgo = this.getTimeAgo(complaint.createdDate);
+    const statusClass = this.getElectricalStatusClass(complaint.status);
+
+    row.innerHTML = `
+        <td class="complaint-id">${complaint.id}</td>
+        <td class="complaint-issue">
+            <strong>${complaint.title}</strong>
+            <br><small>${complaint.description}</small>
+        </td>
+        <td>
+            <i class="fas fa-map-marker-alt"></i> ${complaint.location}
+            <br><small>${timeAgo}</small>
+        </td>
+        <td><span class="category-tag ${complaint.category.toLowerCase()}">${complaint.category}</span></td>
+        <td><span class="priority-badge ${complaint.priority.toLowerCase()}">${complaint.priority}</span></td>
+        <td><span class="status ${statusClass}">${complaint.status}</span></td>
+        <td>
+            <button class="btn btn--sm btn--primary">Assign</button>
+            <button class="btn btn--sm btn--outline">View</button>
+        </td>
+    `;
+
+    return row;
+}
+
 
     createElectricalComplaintActions(complaint) {
         return `
@@ -2757,6 +2935,32 @@ document.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
     touchStartY = e.touches[0].clientY;
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButtons = document.querySelectorAll(".map-toggle-btn");
+  const streetView = document.getElementById("streetMapView");
+  const densityView = document.getElementById("densityMapView");
+
+  toggleButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      // Remove active state from all buttons
+      toggleButtons.forEach(b => b.classList.remove("active"));
+
+      // Mark clicked button active
+      btn.classList.add("active");
+
+      // Switch views based on data-view attribute
+      const view = btn.dataset.view;
+      if (view === "street") {
+        streetView.classList.add("active");
+        densityView.classList.remove("active");
+      } else if (view === "density") {
+        densityView.classList.add("active");
+        streetView.classList.remove("active");
+      }
+    });
+  });
+});
+
 
 document.addEventListener('touchend', (e) => {
     if (!touchStartX || !touchStartY) return;
@@ -2813,6 +3017,7 @@ emergencyStyles.textContent = `
         opacity: 1;
     }
 }
+
 
 .emergency-notification {
     animation: slideIn 0.3s ease-out;
