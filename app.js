@@ -535,6 +535,12 @@ class ElectricalComplaintApp {
             case 'localCommunication':
                 this.updateWhatsAppStats();
                 break;
+            case 'deptCommunication':
+                this.updateWhatsAppStats();
+                break;
+            case 'centralCommunication':
+                this.updateWhatsAppStats();
+                break;
             case 'localProfile':
                 this.updateEngineerProfile();
                 break;
@@ -1617,45 +1623,45 @@ document.addEventListener('keydown', (e) => {
 });
 
 // Add touch gesture support for mobile
-let touchStartX = 0;
-let touchStartY = 0;
+// let touchStartX = 0;
+// let touchStartY = 0;
 
-document.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-});
+// document.addEventListener('touchstart', (e) => {
+//     touchStartX = e.touches[0].clientX;
+//     touchStartY = e.touches[0].clientY;
+// });
 
-document.addEventListener('touchend', (e) => {
-    if (!touchStartX || !touchStartY) return;
+// document.addEventListener('touchend', (e) => {
+//     if (!touchStartX || !touchStartY) return;
     
-    const touchEndX = e.changedTouches[0].clientX;
-    const touchEndY = e.changedTouches[0].clientY;
+//     const touchEndX = e.changedTouches[0].clientX;
+//     const touchEndY = e.changedTouches[0].clientY;
     
-    const deltaX = touchEndX - touchStartX;
-    const deltaY = touchEndY - touchStartY;
+//     const deltaX = touchEndX - touchStartX;
+//     const deltaY = touchEndY - touchStartY;
     
-    // Only handle horizontal swipes
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-        const currentNav = document.querySelector('.nav-items.active');
-        const currentActiveNav = currentNav?.querySelector('.nav-item.active');
+//     // Only handle horizontal swipes
+//     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+//         const currentNav = document.querySelector('.nav-items.active');
+//         const currentActiveNav = currentNav?.querySelector('.nav-item.active');
         
-        if (currentActiveNav) {
-            let nextNav;
-            if (deltaX > 0) {
-                nextNav = currentActiveNav.previousElementSibling;
-            } else {
-                nextNav = currentActiveNav.nextElementSibling;
-            }
+//         if (currentActiveNav) {
+//             let nextNav;
+//             if (deltaX > 0) {
+//                 nextNav = currentActiveNav.previousElementSibling;
+//             } else {
+//                 nextNav = currentActiveNav.nextElementSibling;
+//             }
             
-            if (nextNav && nextNav.classList.contains('nav-item')) {
-                nextNav.click();
-            }
-        }
-    }
+//             if (nextNav && nextNav.classList.contains('nav-item')) {
+//                 nextNav.click();
+//             }
+//         }
+//     }
     
-    touchStartX = 0;
-    touchStartY = 0;
-});
+//     touchStartX = 0;
+//     touchStartY = 0;
+// });
 
 // Performance monitoring for electrical system
 const observeElectricalPageLoad = () => {

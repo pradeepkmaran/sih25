@@ -2629,7 +2629,11 @@
   .nav-items.active {
     display: grid;
   }
-  
+
+  .nav-items-6 {
+      grid-template-columns: repeat(6, 1fr);
+  }
+    
   .nav-item {
     display: flex;
     flex-direction: column;
