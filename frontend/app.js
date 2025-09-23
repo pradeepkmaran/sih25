@@ -1642,73 +1642,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// // Add touch gesture support for mobile
-// let touchStartX = 0;
-// let touchStartY = 0;
-
-// document.addEventListener('touchstart', (e) => {
-//     touchStartX = e.touches[0].clientX;
-//     touchStartY = e.touches[0].clientY;
-// });
-// document.addEventListener("DOMContentLoaded", () => {
-//   const toggleButtons = document.querySelectorAll(".map-toggle-btn");
-//   const streetView = document.getElementById("streetMapView");
-//   const densityView = document.getElementById("densityMapView");
-
-//   toggleButtons.forEach(btn => {
-//     btn.addEventListener("click", () => {
-//       // Remove active state from all buttons
-//       toggleButtons.forEach(b => b.classList.remove("active"));
-
-//       // Mark clicked button active
-//       btn.classList.add("active");
-
-//       // Switch views based on data-view attribute
-//       const view = btn.dataset.view;
-//       if (view === "street") {
-//         streetView.classList.add("active");
-//         densityView.classList.remove("active");
-//       } else if (view === "density") {
-//         densityView.classList.add("active");
-//         streetView.classList.remove("active");
-//       }
-//     });
-//   });
-// });
-
-
-// document.addEventListener('touchend', (e) => {
-//     if (!touchStartX || !touchStartY) return;
-    
-//     const touchEndX = e.changedTouches[0].clientX;
-//     const touchEndY = e.changedTouches[0].clientY;
-    
-//     const deltaX = touchEndX - touchStartX;
-//     const deltaY = touchEndY - touchStartY;
-    
-//     // Only handle horizontal swipes
-//     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
-//         const currentNav = document.querySelector('.nav-items.active');
-//         const currentActiveNav = currentNav?.querySelector('.nav-item.active');
-        
-//         if (currentActiveNav) {
-//             let nextNav;
-//             if (deltaX > 0) {
-//                 nextNav = currentActiveNav.previousElementSibling;
-//             } else {
-//                 nextNav = currentActiveNav.nextElementSibling;
-//             }
-            
-//             if (nextNav && nextNav.classList.contains('nav-item')) {
-//                 nextNav.click();
-//             }
-//         }
-//     }
-    
-//     touchStartX = 0;
-//     touchStartY = 0;
-// });
-
 // Performance monitoring for electrical system
 const observeElectricalPageLoad = () => {
     if (window.performance && window.performance.timing) {
@@ -1733,7 +1666,6 @@ emergencyStyles.textContent = `
     }
 }
 
-
 .emergency-notification {
     animation: slideIn 0.3s ease-out;
 }
@@ -1745,4 +1677,5 @@ emergencyStyles.textContent = `
     animation: pulse 2s infinite;
 }
 `;
+
 document.head.appendChild(emergencyStyles);
