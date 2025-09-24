@@ -1821,3 +1821,29 @@ emergencyStyles.textContent = `
 `;
 
 document.head.appendChild(emergencyStyles);
+
+document.addEventListener('DOMContentLoaded', function () {
+  const streetBtn = document.querySelector('.map-toggle-btn[data-view="street"]');
+  const densityBtn = document.querySelector('.map-toggle-btn[data-view="density"]');
+  const streetView = document.getElementById('streetMapView');
+  const densityView = document.getElementById('densityMapView');
+
+  function setActiveView(view) {
+    if (view === 'street') {
+      streetView.classList.add('active');
+      densityView.classList.remove('active');
+      streetBtn.classList.add('active');
+      densityBtn.classList.remove('active');
+    } else {
+      streetView.classList.remove('active');
+      densityView.classList.add('active');
+      streetBtn.classList.remove('active');
+      densityBtn.classList.add('active');
+    }
+  }
+
+  if (streetBtn && densityBtn && streetView && densityView) {
+    streetBtn.addEventListener('click', () => setActiveView('street'));
+    densityBtn.addEventListener('click', () => setActiveView('density'));
+  }
+});
