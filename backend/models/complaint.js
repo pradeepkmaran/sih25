@@ -9,7 +9,7 @@ const complaintSchema = new mongoose.Schema({
   priority: String,
   category: String,
   department: { type: mongoose.Schema.Types.ObjectId, ref: 'Department' },
-  branch: { type: mongoose.Schema.Types.ObjectId, ref: 'Branch' }, // <-- Added branch reference
+  branch: { type: mongoose.Schema.Types.ObjectId, ref: 'Branch' },
   reportedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   createdDate: Date,
   resolvedDate: Date,

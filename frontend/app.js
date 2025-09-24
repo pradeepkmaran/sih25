@@ -264,51 +264,190 @@ class ElectricalComplaintApp {
     async fetchAllDataFromAPI() {
         try {
             // Complaints
-            const complaintsRes = await fetch('http://localhost:3000/api/complaints');
+            const complaintsRes = await fetch('https://sih25-api.vercel.app/api/complaints');
             if (!complaintsRes.ok) throw new Error('Failed to fetch complaints');
             this.data.complaints = await complaintsRes.json();
 
             // Staff
-            const staffRes = await fetch('http://localhost:3000/api/staff');
-            if (staffRes.ok) {
-                this.data.staff = await staffRes.json();
-            }
+            // const staffRes = await fetch('https://sih25-api.vercel.app/api/staff');
+            // if (staffRes.ok) {
+            //     this.data.staff = await staffRes.json();
+            // }
 
-            // Infrastructure
-            const infraRes = await fetch('http://localhost:3000/api/infrastructure');
-            if (infraRes.ok) {
-                this.data.infrastructure = await infraRes.json();
-            }
+            // // Infrastructure
+            // const infraRes = await fetch('https://sih25-api.vercel.app/api/infrastructure');
+            // if (infraRes.ok) {
+            //     this.data.infrastructure = await infraRes.json();
+            // }
 
-            // Performance
-            const perfRes = await fetch('http://localhost:3000/api/performance');
-            if (perfRes.ok) {
-                this.data.performance = await perfRes.json();
-            }
+            // // Performance
+            // const perfRes = await fetch('https://sih25-api.vercel.app/api/performance');
+            // if (perfRes.ok) {
+            //     this.data.performance = await perfRes.json();
+            // }
 
-            // Emergency Contacts
-            const contactsRes = await fetch('http://localhost:3000/api/emergencyContacts');
-            if (contactsRes.ok) {
-                this.data.emergencyContacts = await contactsRes.json();
+            // // Emergency Contacts
+            // const contactsRes = await fetch('https://sih25-api.vercel.app/api/emergencyContacts');
+            // if (contactsRes.ok) {
+            //     this.data.emergencyContacts = await contactsRes.json();
+            // }
+
+            // Work Orders
+            const workOrdersRes = await fetch('https://sih25-api.vercel.app/api/workorders');
+            if (workOrdersRes.ok) {
+                this.data.workOrders = await workOrdersRes.json();
             }
 
             // Re-render UI with new data
-            
-            
+            this.updateDashboardStats();
+            this.renderPriorityComplaints();
+            this.renderRecentActivity();
+            this.updateFieldStats();
             this.renderElectricalComplaints();
             this.updateRoleSpecificData();
             this.setupElectricalCharts();
+            this.populateWorkOrdersTable();
+
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     }
 
+    renderRecentActivity() {
+        const sorted = this.data.workOrders
+            .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+            .slice(0, 3);
+
+        const activityList = document.querySelector('.recent-activity .activity-list');
+        activityList.innerHTML = '';
+
+        sorted.forEach(order => {
+            let icon = 'fa-check-circle activity-icon success';
+            if (order.priority === 'Critical') icon = 'fa-bolt activity-icon danger';
+            else if (order.priority === 'High') icon = 'fa-exclamation-triangle activity-icon warning';
+            else if (order.status === 'In Progress') icon = 'fa-wrench activity-icon warning';
+            else if (order.status === 'Assigned') icon = 'fa-user-plus activity-icon info';
+
+            const timeAgo = order.createdAt
+                ? `${Math.floor((Date.now() - new Date(order.createdAt)) / 3600000)} hours ago`
+                : '';
+
+            activityList.innerHTML += `
+                <div class="activity-item">
+                    <i class="fas ${icon}"></i>
+                    <div class="activity-content">
+                        <p>${order.task || ''} - ${order.location || ''}</p>
+                        <span class="activity-time">${timeAgo}</span>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+
+    renderPriorityComplaints() {
+        const priorityOrder = { 'Emergency': 4, 'Critical': 3, 'High': 2, 'Medium': 1, 'Low': 0 };
+
+        const filtered = this.data.complaints
+            .filter(c => c.status !== 'Resolved')
+            .sort((a, b) => (priorityOrder[b.priority] || 0) - (priorityOrder[a.priority] || 0))
+            .slice(0, 3);
+
+        const tbody = document.querySelector('#priorityComplaints tbody');
+        tbody.innerHTML = '';
+
+        filtered.forEach(c => {
+            const tr = document.createElement('tr');
+            tr.className = `complaint-row priority-${(c.priority || '').toLowerCase()}`;
+            tr.innerHTML = `
+                <td class="complaint-id">${c.complaintId || ''}</td>
+                <td class="complaint-issue">
+                    <strong>${c.title || ''}</strong>
+                    <br><small>${c.description || ''}</small>
+                </td>
+                <td>
+                    <i class="fas fa-map-marker-alt"></i> ${c.location || ''}
+                    <br><small>${c.timeAgo || ''}</small>
+                </td>
+                <td><span class="priority-badge ${(c.priority || '').toLowerCase()}">${c.priority || ''}</span></td>
+                <td><span class="status status--${(c.status || '').toLowerCase().replace(/\\s/g, '-') }">${c.status || ''}</span></td>
+                <td class="work-order">${c.workOrderId || ''}</td>
+                <td>
+                    <button class="btn btn--sm btn--primary">Update</button>w
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    updateDashboardStats() {
+        const complaints = this.data.complaints || [];
+
+        document.getElementById('statEmergency').textContent = complaints.filter(c => c.priority === 'Critical').length;
+        document.getElementById('statHigh').textContent = complaints.filter(c => c.priority === 'High').length;
+        document.getElementById('statPending').textContent = complaints.filter(c => c.status === 'Pending').length;
+        document.getElementById('statWorkOrders').textContent = complaints.filter(c => c.workOrderNumber).length;
+    }
+
+
+    updateFieldStats() {
+        try {
+            const workOrders = this.data.workOrders || [];
+
+            const activeCount = workOrders.filter(w => w.status === 'Open' || w.status === 'In Progress').length;
+            const emergencyCount = workOrders.filter(w => w.priority === 'Critical').length;
+            const todayCount = workOrders.filter(w => {
+                const today = new Date();
+                const created = new Date(w.createdAt);
+                return created.toDateString() === today.toDateString();
+            }).length;
+
+            document.getElementById('activeWorkOrders').textContent = activeCount;
+            document.getElementById('emergencyCalls').textContent = emergencyCount;
+            document.getElementById('scheduledToday').textContent = todayCount;
+        } catch (e) {
+            console.error('Failed to update field stats', e);
+        }
+    }
+
+
+    populateWorkOrdersTable() {
+        try {
+            const workOrders = this.data.workOrders || [];
+
+            const tbody = document.getElementById('work-order-table');
+            tbody.innerHTML = ''; 
+
+            workOrders.forEach(order => {
+                const tr = document.createElement('tr');
+                tr.className = `work-order-row ${order.priority?.toLowerCase() || ''}`;
+                tr.innerHTML = `
+                    <td class="work-order-id">${order.workOrderId || ''}</td>
+                    <td class="work-order-task">
+                        <strong>${order.task || ''}</strong>
+                        <br><small>${order.details || ''}</small>
+                    </td>
+                    <td>${order.location || ''}</td>
+                    <td>${order.assignedTo || ''}</td>
+                    <td><span class="priority-badge ${order.priority?.toLowerCase() || ''}">${order.priority || ''}</span></td>
+                    <td><span class="status status--${(order.status || '').toLowerCase().replace(/\s/g, '-') }">${order.status || ''}</span></td>
+                    <td>
+                        <button class="btn btn--sm btn--primary">Update</button>
+                        <button class="btn btn--sm btn--outline">Details</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        } catch (error) {
+            console.error('Error loading work orders:', error);
+        }
+    }
+
     init() {
         this.fetchAllDataFromAPI();
-
+        
         this.setupEventListeners();
         this.updateHeader();
-        this.renderElectricalComplaints();
         this.startRealTimeUpdates();
         
         setTimeout(() => {
@@ -562,9 +701,11 @@ class ElectricalComplaintApp {
     setupElectricalPageFeatures(pageId) {
         switch (pageId) {
             case 'localComplaints':
+                this.fetchAllDataFromAPI();
                 this.renderElectricalComplaints();
                 break;
             case 'localFieldWork':
+                this.fetchAllDataFromAPI();
                 this.updateFieldWorkData();
                 break;
             case 'deptAnalytics':
@@ -607,53 +748,47 @@ class ElectricalComplaintApp {
         }
     }
 
-    renderElectricalComplaints(branchId = "68d2313575e54d73f0440030") {
-    //const ebTnagar =  Branch.findOne({ _id: branchId });
-    
-    const tbody = document.getElementById('complaintsTableBody');
-    if (!tbody) return;
+    renderElectricalComplaints() {
+        const tbody = document.getElementById('complaintsTableBody');
+        if (!tbody) return;
 
-    tbody.innerHTML = '';
-console.log(this.data.complaints);
-    this.data.complaints
-        .filter(complaint => (complaint.branch || "t_nagar") === branchId)
-        .forEach(complaint => {
+        tbody.innerHTML = ''; 
+
+        this.data.complaints.forEach(complaint => {
             const row = this.createElectricalComplaintRow(complaint);
-            //console.log('Created row for complaint:', complaint.id,);
             tbody.appendChild(row);
         });
-}
+    }
 
+    createElectricalComplaintRow(complaint) {
+        const row = document.createElement('tr');
+        row.className = `complaint-row electrical priority-${complaint.priority.toLowerCase()}`;
+        row.dataset.complaintId = complaint.id;      
 
-createElectricalComplaintRow(complaint) {
-    const row = document.createElement('tr');
-    row.className = `complaint-row electrical priority-${complaint.priority.toLowerCase()}`;
-    row.dataset.complaintId = complaint.id;
+        const timeAgo = this.getTimeAgo(complaint.createdDate);
+        const statusClass = this.getElectricalStatusClass(complaint.status);
 
-    const timeAgo = this.getTimeAgo(complaint.createdDate);
-    const statusClass = this.getElectricalStatusClass(complaint.status);
+        row.innerHTML = `
+            <td class="complaint-id">${complaint.complaintId}</td>
+            <td class="complaint-issue">
+                <strong>${complaint.title}</strong>
+                <br><small>${complaint.description}</small>
+            </td>
+            <td>
+                <i class="fas fa-map-marker-alt"></i> ${complaint.location}
+                <br><small>${timeAgo}</small>
+            </td>
+            <td><span class="category-tag ${complaint.category.toLowerCase()}">${complaint.category}</span></td>
+            <td><span class="priority-badge ${complaint.priority.toLowerCase()}">${complaint.priority}</span></td>
+            <td><span class="status ${statusClass}">${complaint.status}</span></td>
+            <td>
+                <button class="btn btn--sm btn--primary">Assign</button>
+                <button class="btn btn--sm btn--outline">View</button>
+            </td>
+        `;
 
-    row.innerHTML = `
-        <td class="complaint-id">${complaint.complaintid}</td>
-        <td class="complaint-issue">
-            <strong>${complaint.title}</strong>
-            <br><small>${complaint.description}</small>
-        </td>
-        <td>
-            <i class="fas fa-map-marker-alt"></i> ${complaint.location}
-            <br><small>${timeAgo}</small>
-        </td>
-        <td><span class="category-tag ${complaint.category.toLowerCase()}">${complaint.category}</span></td>
-        <td><span class="priority-badge ${complaint.priority.toLowerCase()}">${complaint.priority}</span></td>
-        <td><span class="status ${statusClass}">${complaint.status}</span></td>
-        <td>
-            <button class="btn btn--sm btn--primary">Assign</button>
-            <button class="btn btn--sm btn--outline">View</button>
-        </td>
-    `;
-
-    return row;
-}
+        return row;
+    }
 
 
     createElectricalComplaintActions(complaint) {

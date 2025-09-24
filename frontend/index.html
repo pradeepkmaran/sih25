@@ -54,22 +54,22 @@
                 
                 <div class="stats-grid">
                     <div class="stat-card priority-critical">
-                        <div class="stat-number">2</div>
+                        <div class="stat-number" id="statEmergency">0</div>
                         <div class="stat-label">Emergency</div>
                         <div class="stat-icon"><i class="fas fa-bolt"></i></div>
                     </div>
                     <div class="stat-card priority-high">
-                        <div class="stat-number">8</div>
+                        <div class="stat-number" id="statHigh">0</div>
                         <div class="stat-label">High Priority</div>
                         <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
                     </div>
                     <div class="stat-card priority-medium">
-                        <div class="stat-number">12</div>
+                        <div class="stat-number" id="statWorkOrders">0</div>
                         <div class="stat-label">Work Orders</div>
                         <div class="stat-icon"><i class="fas fa-tools"></i></div>
                     </div>
                     <div class="stat-card priority-low">
-                        <div class="stat-number">22</div>
+                        <div class="stat-number" id="statPending">0</div>
                         <div class="stat-label">Pending</div>
                         <div class="stat-icon"><i class="fas fa-clock"></i></div>
                     </div>
@@ -259,32 +259,10 @@
                 <div class="recent-activity">
                     <h3>Recent Field Activity</h3>
                     <div class="activity-list">
-                        <div class="activity-item">
-                            <i class="fas fa-check-circle activity-icon success"></i>
-                            <div class="activity-content">
-                                <p>Cable spark near bus stop resolved - Emergency Team</p>
-                                <span class="activity-time">2 hours ago</span>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <i class="fas fa-wrench activity-icon warning"></i>
-                            <div class="activity-content">
-                                <p>Transformer maintenance scheduled for T-NG-08</p>
-                                <span class="activity-time">4 hours ago</span>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <i class="fas fa-user-plus activity-icon info"></i>
-                            <div class="activity-content">
-                                <p>New service connection request assigned - GN Chetty Road</p>
-                                <span class="activity-time">6 hours ago</span>
-                            </div>
-                        </div>
+                        <!-- JS will insert recent activity items here -->
                     </div>
                 </div>
             </div>
-
-            <!-- Electrical Complaints -->
             
             <!-- Electrical Complaints -->
             <div class="page" id="localComplaints">
@@ -319,23 +297,23 @@
 
                 <!-- UPDATED: TABLE STRUCTURE FOR ALL COMPLAINTS -->
                 <div class="complaint-table-container detailed" id="allComplaints">
-  <table class="complaint-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Issue & Description</th>
-        <th>Location & Time</th>
-        <th>Category</th>
-        <th>Priority</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody id="complaintsTableBody">
-      <!-- JS will insert rows here -->
-    </tbody>
-  </table>
-</div>
+                    <table class="complaint-table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Issue & Description</th>
+                            <th>Location & Time</th>
+                            <th>Category</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody id="complaintsTableBody">
+                        <!-- JS will insert rows here -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Field Work -->
@@ -347,21 +325,21 @@
 
                 <div class="field-stats">
                     <div class="field-stat">
-                        <span class="field-number">5</span>
+                        <span class="field-number" id="activeWorkOrders">0</span>
                         <span class="field-label">Active Work Orders</span>
                     </div>
                     <div class="field-stat">
-                        <span class="field-number">2</span>
+                        <span class="field-number" id="emergencyCalls">0</span>
                         <span class="field-label">Emergency Calls</span>
                     </div>
                     <div class="field-stat">
-                        <span class="field-number">15</span>
+                        <span class="field-number" id="scheduledToday">0</span>
                         <span class="field-label">Scheduled Today</span>
                     </div>
                 </div>
 
                 <!-- UPDATED: TABLE STRUCTURE FOR WORK ORDERS -->
-                <div class="work-orders">
+                 <div class="work-orders detailed" id="allComplaints">
                     <h3>Today's Work Orders</h3>
                     <div class="work-order-table-container">
                         <table class="work-order-table">
@@ -376,68 +354,13 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="work-order-row emergency">
-                                    <td class="work-order-id">WO/TNE/2025/0046</td>
-                                    <td class="work-order-task">
-                                        <strong>Transformer Overload - Ranganathan Street</strong>
-                                        <br><small>Load balancing required urgently for T-NG-15</small>
-                                    </td>
-                                    <td>
-                                        <i class="fas fa-map-marker-alt"></i> T-NG-15, Near Naidu Hall
-                                    </td>
-                                    <td>
-                                        <i class="fas fa-user"></i> AE Ramesh Kumar
-                                    </td>
-                                    <td><span class="priority-badge emergency">Emergency</span></td>
-                                    <td><span class="status status--warning">In Progress</span></td>
-                                    <td>
-                                        <button class="btn btn--sm btn--primary">Update</button>
-                                        <button class="btn btn--sm btn--outline">Details</button>
-                                    </td>
-                                </tr>
-                                <tr class="work-order-row high">
-                                    <td class="work-order-id">WO/TNE/2025/0045</td>
-                                    <td class="work-order-task">
-                                        <strong>Street Light Repair - Pondy Bazaar</strong>
-                                        <br><small>LED bulb replacement needed for pole PB-45</small>
-                                    </td>
-                                    <td>
-                                        <i class="fas fa-lightbulb"></i> Pole PB-45
-                                    </td>
-                                    <td>
-                                        <i class="fas fa-user"></i> AE Subramanian
-                                    </td>
-                                    <td><span class="priority-badge high">High</span></td>
-                                    <td><span class="status status--info">Scheduled</span></td>
-                                    <td>
-                                        <button class="btn btn--sm btn--primary">Start</button>
-                                        <button class="btn btn--sm btn--outline">Details</button>
-                                    </td>
-                                </tr>
-                                <tr class="work-order-row medium">
-                                    <td class="work-order-id">WO/TNE/2025/0047</td>
-                                    <td class="work-order-task">
-                                        <strong>Cable Maintenance - Habibullah Road</strong>
-                                        <br><small>Routine inspection and testing of underground cables</small>
-                                    </td>
-                                    <td>
-                                        <i class="fas fa-plug"></i> Habibullah Road Junction
-                                    </td>
-                                    <td>
-                                        <i class="fas fa-user"></i> Technician Team A
-                                    </td>
-                                    <td><span class="priority-badge medium">Medium</span></td>
-                                    <td><span class="status status--success">Completed</span></td>
-                                    <td>
-                                        <button class="btn btn--sm btn--outline">Report</button>
-                                    </td>
-                                </tr>
+                            <tbody id="work-order-table">
+                            <!-- JS will insert rows here -->
                             </tbody>
-                        </table>
-                    </div>
+                    </table>
                 </div>
-                <div class="equipment-tracking">
+
+                <!-- <div class="equipment-tracking">
                     <h3>Equipment & Materials</h3>
                     <div class="equipment-grid">
                         <div class="equipment-item">
@@ -462,10 +385,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Communication -->
-            <div class="page" id="localCommunication">
+            <!-- <div class="page" id="localCommunication">
                 <div class="page-header">
                     <h2>Communication Hub</h2>
                     <button class="btn btn--sm btn--primary">New Message</button>
@@ -552,7 +475,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Profile -->
             <div class="page" id="localProfile">
