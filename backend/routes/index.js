@@ -9,6 +9,9 @@ const employeeRoutes = require('./employeeRoutes');
 const fieldworkRoutes = require('./fieldworkRoutes');
 const workorderRoutes = require('./workorderRoutes');
 
+router.get('/', (req, res) => {
+  res.send('API is running...');
+});
 router.use('/complaints', complaintRoutes);
 router.use('/users', userRoutes);
 router.use('/departments', departmentRoutes);
