@@ -14,163 +14,164 @@ class ElectricalComplaintApp {
         this.liveUpdateInterval = null;
         
         // Electrical complaint data from the provided JSON
-        this.data = {
-            complaints: [
-                {
-                    id: "TNE2025001",
-                    title: "Street Light Not Working - Pondy Bazaar",
-                    description: "Street light pole number PB-45 on Pondy Bazaar main road has been non-functional for 4 days. LED bulb seems damaged. Causing safety issues for shoppers and pedestrians during evening hours.",
-                    location: "Pondy Bazaar, T Nagar",
-                    coordinates: { lat: 13.0417, lng: 80.2343 },
-                    landmark: "Near Saravana Bhavan Restaurant",
-                    poleNumber: "PB-45",
-                    status: "Work Order Issued",
-                    priority: "High",
-                    category: "Street Light Maintenance",
-                    subCategory: "LED Bulb Replacement",
-                    department: "T Nagar EB Office",
-                    reportedBy: "M. Rajesh",
-                    reporterPhone: "+91 9876543210",
-                    consumerNumber: "12304567890",
-                    createdDate: "2025-09-18T10:30:00Z",
-                    assignedTo: "AE Subramanian (Field Team-1)",
-                    workOrderNumber: "WO/TNE/2025/0045",
-                    estimatedCost: 450,
-                    images: ["streetlight_pondy1.jpg", "pole_pb45.jpg"],
-                    upvotes: 23,
-                    comments: 5,
-                    faultType: "Infrastructure",
-                    urgencyLevel: "Medium"
-                },
-                {
-                    id: "TNE2025002",
-                    title: "Frequent Power Cuts - Ranganathan Street",
-                    description: "Experiencing 3-4 hour power cuts daily for the past week. Multiple households and shops affected. Transformer T-NG-15 seems to be overloading during peak hours.",
-                    location: "Ranganathan Street, T Nagar", 
-                    coordinates: { lat: 13.0428, lng: 80.2341 },
-                    landmark: "Near Naidu Hall",
-                    transformerNumber: "T-NG-15",
-                    status: "In Progress",
-                    priority: "Critical",
-                    category: "Power Supply Issue",
-                    subCategory: "Transformer Overload",
-                    department: "T Nagar EB Office",
-                    reportedBy: "Shop Owners Association",
-                    reporterPhone: "+91 9123456789",
-                    createdDate: "2025-09-19T08:15:00Z",
-                    assignedTo: "AE Ramesh Kumar (Transformer Team)",
-                    workOrderNumber: "WO/TNE/2025/0046",
-                    estimatedCost: 15000,
-                    images: ["transformer_t_ng_15.jpg", "overload_damage.jpg"],
-                    upvotes: 67,
-                    comments: 18,
-                    faultType: "Equipment Failure",
-                    urgencyLevel: "High",
-                    affectedConsumers: 120
-                },
-                {
-                    id: "TNE2025003",
-                    title: "Meter Reading Error - Habibullah Road",
-                    description: "Electricity meter showing abnormally high consumption (1200 units) this month compared to usual 300 units. No change in usage pattern. Requesting meter testing.",
-                    location: "Habibullah Road, T Nagar",
-                    coordinates: { lat: 13.0401, lng: 80.2298 },
-                    landmark: "Near Joyalukkas Showroom", 
-                    meterNumber: "HB4501234",
-                    status: "Verified",
-                    priority: "Medium",
-                    category: "Meter Related",
-                    subCategory: "Billing Dispute",
-                    department: "T Nagar EB Office",
-                    reportedBy: "Mrs. Lakshmi Devi",
-                    reporterPhone: "+91 9876512345",
-                    consumerNumber: "45012340567",
-                    createdDate: "2025-09-20T14:20:00Z",
-                    assignedTo: "Meter Reader - Kumar",
-                    previousReading: 15240,
-                    currentReading: 16440,
-                    averageMonthlyUsage: 300,
-                    images: ["meter_hb4501234.jpg", "bill_comparison.jpg"],
-                    upvotes: 8,
-                    comments: 3,
-                    faultType: "Billing Issue",
-                    urgencyLevel: "Low"
-                },
-                {
-                    id: "TNE2025004", 
-                    title: "Voltage Fluctuation - Usman Road",
-                    description: "Severe voltage fluctuations causing damage to appliances. Voltage dropping to 180V during evening peak hours. Multiple complaints from nearby consumers.",
-                    location: "Usman Road, T Nagar",
-                    coordinates: { lat: 13.0445, lng: 80.2387 },
-                    landmark: "Near Spencer Plaza",
-                    status: "Open",
-                    priority: "High", 
-                    category: "Power Quality",
-                    subCategory: "Voltage Fluctuation",
-                    department: "T Nagar EB Office",
-                    reportedBy: "Apartment Association",
-                    reporterPhone: "+91 9234567890",
-                    createdDate: "2025-09-17T09:45:00Z",
-                    assignedTo: null,
-                    affectedArea: "Usman Road (200m stretch)",
-                    images: ["voltage_meter.jpg", "damaged_appliance.jpg"],
-                    upvotes: 45,
-                    comments: 12,
-                    faultType: "Power Quality",
-                    urgencyLevel: "High",
-                    affectedConsumers: 85
-                },
-                {
-                    id: "TNE2025005",
-                    title: "Cable Spark Near Bus Stop",
-                    description: "Overhead cable sparking near T Nagar bus stop. Safety hazard for commuters. Cable insulation damaged due to tree branch contact.",
-                    location: "T Nagar Bus Stop",
-                    coordinates: { lat: 13.0427, lng: 80.2345 },
-                    landmark: "T Nagar Bus Terminus",
-                    status: "Resolved", 
-                    priority: "Emergency",
-                    category: "Safety Hazard",
-                    subCategory: "Cable Damage",
-                    department: "T Nagar EB Office",
-                    reportedBy: "Bus Conductor - Murugan",
-                    reporterPhone: "+91 9345678901",
-                    createdDate: "2025-09-15T11:30:00Z",
-                    resolvedDate: "2025-09-15T16:45:00Z",
-                    assignedTo: "Emergency Response Team",
-                    workOrderNumber: "WO/TNE/2025/0044",
-                    images: ["cable_spark1.jpg", "cable_repaired.jpg", "safety_clearance.jpg"],
-                    upvotes: 92,
-                    comments: 21,
-                    faultType: "Safety Emergency",
-                    urgencyLevel: "Emergency",
-                    resolutionTime: "5 hours 15 minutes"
-                },
-                {
-                    id: "TNE2025006",
-                    title: "New Service Connection Request",
-                    description: "New commercial establishment requires 10KW 3-phase connection for textile showroom. All documents submitted, waiting for site inspection.",
-                    location: "GN Chetty Road, T Nagar",
-                    coordinates: { lat: 13.0423, lng: 80.2378 },
-                    landmark: "Near Malar Hospital",
-                    status: "Inspection Scheduled",
-                    priority: "Medium",
-                    category: "Service Connection",
-                    subCategory: "New Connection",
-                    department: "T Nagar EB Office",
-                    reportedBy: "K. Selvam - Business Owner",
-                    reporterPhone: "+91 9567890123",
-                    createdDate: "2025-09-16T10:00:00Z",
-                    assignedTo: "AE Inspection Team",
-                    requiredLoad: "10 KW",
-                    connectionType: "3-Phase Commercial",
-                    applicationNumber: "NC/TN/2025/0156",
-                    inspectionDate: "2025-09-23T10:00:00Z",
-                    images: ["shop_front.jpg", "documents.jpg"],
-                    upvotes: 3,
-                    comments: 1,
-                    faultType: "Service Request",
-                    urgencyLevel: "Low"
-                }
-            ],
+        // this.data = { }
+        this.data = { 
+            // complaints: [
+            //     {
+            //         id: "TNE2025001",
+            //         title: "Street Light Not Working - Pondy Bazaar",
+            //         description: "Street light pole number PB-45 on Pondy Bazaar main road has been non-functional for 4 days. LED bulb seems damaged. Causing safety issues for shoppers and pedestrians during evening hours.",
+            //         location: "Pondy Bazaar, T Nagar",
+            //         coordinates: { lat: 13.0417, lng: 80.2343 },
+            //         landmark: "Near Saravana Bhavan Restaurant",
+            //         poleNumber: "PB-45",
+            //         status: "Work Order Issued",
+            //         priority: "High",
+            //         category: "Street Light Maintenance",
+            //         subCategory: "LED Bulb Replacement",
+            //         department: "T Nagar EB Office",
+            //         reportedBy: "M. Rajesh",
+            //         reporterPhone: "+91 9876543210",
+            //         consumerNumber: "12304567890",
+            //         createdDate: "2025-09-18T10:30:00Z",
+            //         assignedTo: "AE Subramanian (Field Team-1)",
+            //         workOrderNumber: "WO/TNE/2025/0045",
+            //         estimatedCost: 450,
+            //         images: ["streetlight_pondy1.jpg", "pole_pb45.jpg"],
+            //         upvotes: 23,
+            //         comments: 5,
+            //         faultType: "Infrastructure",
+            //         urgencyLevel: "Medium"
+            //     },
+            //     {
+            //         id: "TNE2025002",
+            //         title: "Frequent Power Cuts - Ranganathan Street",
+            //         description: "Experiencing 3-4 hour power cuts daily for the past week. Multiple households and shops affected. Transformer T-NG-15 seems to be overloading during peak hours.",
+            //         location: "Ranganathan Street, T Nagar", 
+            //         coordinates: { lat: 13.0428, lng: 80.2341 },
+            //         landmark: "Near Naidu Hall",
+            //         transformerNumber: "T-NG-15",
+            //         status: "In Progress",
+            //         priority: "Critical",
+            //         category: "Power Supply Issue",
+            //         subCategory: "Transformer Overload",
+            //         department: "T Nagar EB Office",
+            //         reportedBy: "Shop Owners Association",
+            //         reporterPhone: "+91 9123456789",
+            //         createdDate: "2025-09-19T08:15:00Z",
+            //         assignedTo: "AE Ramesh Kumar (Transformer Team)",
+            //         workOrderNumber: "WO/TNE/2025/0046",
+            //         estimatedCost: 15000,
+            //         images: ["transformer_t_ng_15.jpg", "overload_damage.jpg"],
+            //         upvotes: 67,
+            //         comments: 18,
+            //         faultType: "Equipment Failure",
+            //         urgencyLevel: "High",
+            //         affectedConsumers: 120
+            //     },
+            //     {
+            //         id: "TNE2025003",
+            //         title: "Meter Reading Error - Habibullah Road",
+            //         description: "Electricity meter showing abnormally high consumption (1200 units) this month compared to usual 300 units. No change in usage pattern. Requesting meter testing.",
+            //         location: "Habibullah Road, T Nagar",
+            //         coordinates: { lat: 13.0401, lng: 80.2298 },
+            //         landmark: "Near Joyalukkas Showroom", 
+            //         meterNumber: "HB4501234",
+            //         status: "Verified",
+            //         priority: "Medium",
+            //         category: "Meter Related",
+            //         subCategory: "Billing Dispute",
+            //         department: "T Nagar EB Office",
+            //         reportedBy: "Mrs. Lakshmi Devi",
+            //         reporterPhone: "+91 9876512345",
+            //         consumerNumber: "45012340567",
+            //         createdDate: "2025-09-20T14:20:00Z",
+            //         assignedTo: "Meter Reader - Kumar",
+            //         previousReading: 15240,
+            //         currentReading: 16440,
+            //         averageMonthlyUsage: 300,
+            //         images: ["meter_hb4501234.jpg", "bill_comparison.jpg"],
+            //         upvotes: 8,
+            //         comments: 3,
+            //         faultType: "Billing Issue",
+            //         urgencyLevel: "Low"
+            //     },
+            //     {
+            //         id: "TNE2025004", 
+            //         title: "Voltage Fluctuation - Usman Road",
+            //         description: "Severe voltage fluctuations causing damage to appliances. Voltage dropping to 180V during evening peak hours. Multiple complaints from nearby consumers.",
+            //         location: "Usman Road, T Nagar",
+            //         coordinates: { lat: 13.0445, lng: 80.2387 },
+            //         landmark: "Near Spencer Plaza",
+            //         status: "Open",
+            //         priority: "High", 
+            //         category: "Power Quality",
+            //         subCategory: "Voltage Fluctuation",
+            //         department: "T Nagar EB Office",
+            //         reportedBy: "Apartment Association",
+            //         reporterPhone: "+91 9234567890",
+            //         createdDate: "2025-09-17T09:45:00Z",
+            //         assignedTo: null,
+            //         affectedArea: "Usman Road (200m stretch)",
+            //         images: ["voltage_meter.jpg", "damaged_appliance.jpg"],
+            //         upvotes: 45,
+            //         comments: 12,
+            //         faultType: "Power Quality",
+            //         urgencyLevel: "High",
+            //         affectedConsumers: 85
+            //     },
+            //     {
+            //         id: "TNE2025005",
+            //         title: "Cable Spark Near Bus Stop",
+            //         description: "Overhead cable sparking near T Nagar bus stop. Safety hazard for commuters. Cable insulation damaged due to tree branch contact.",
+            //         location: "T Nagar Bus Stop",
+            //         coordinates: { lat: 13.0427, lng: 80.2345 },
+            //         landmark: "T Nagar Bus Terminus",
+            //         status: "Resolved", 
+            //         priority: "Emergency",
+            //         category: "Safety Hazard",
+            //         subCategory: "Cable Damage",
+            //         department: "T Nagar EB Office",
+            //         reportedBy: "Bus Conductor - Murugan",
+            //         reporterPhone: "+91 9345678901",
+            //         createdDate: "2025-09-15T11:30:00Z",
+            //         resolvedDate: "2025-09-15T16:45:00Z",
+            //         assignedTo: "Emergency Response Team",
+            //         workOrderNumber: "WO/TNE/2025/0044",
+            //         images: ["cable_spark1.jpg", "cable_repaired.jpg", "safety_clearance.jpg"],
+            //         upvotes: 92,
+            //         comments: 21,
+            //         faultType: "Safety Emergency",
+            //         urgencyLevel: "Emergency",
+            //         resolutionTime: "5 hours 15 minutes"
+            //     },
+            //     {
+            //         id: "TNE2025006",
+            //         title: "New Service Connection Request",
+            //         description: "New commercial establishment requires 10KW 3-phase connection for textile showroom. All documents submitted, waiting for site inspection.",
+            //         location: "GN Chetty Road, T Nagar",
+            //         coordinates: { lat: 13.0423, lng: 80.2378 },
+            //         landmark: "Near Malar Hospital",
+            //         status: "Inspection Scheduled",
+            //         priority: "Medium",
+            //         category: "Service Connection",
+            //         subCategory: "New Connection",
+            //         department: "T Nagar EB Office",
+            //         reportedBy: "K. Selvam - Business Owner",
+            //         reporterPhone: "+91 9567890123",
+            //         createdDate: "2025-09-16T10:00:00Z",
+            //         assignedTo: "AE Inspection Team",
+            //         requiredLoad: "10 KW",
+            //         connectionType: "3-Phase Commercial",
+            //         applicationNumber: "NC/TN/2025/0156",
+            //         inspectionDate: "2025-09-23T10:00:00Z",
+            //         images: ["shop_front.jpg", "documents.jpg"],
+            //         upvotes: 3,
+            //         comments: 1,
+            //         faultType: "Service Request",
+            //         urgencyLevel: "Low"
+            //     }
+            // ],
             staff: [
                 {
                     name: "V. Subramanian",
@@ -302,11 +303,11 @@ class ElectricalComplaintApp {
             this.updateDashboardStats();
             this.renderPriorityComplaints();
             this.renderRecentActivity();
-            this.updateFieldStats();
             this.renderElectricalComplaints();
+            this.populateWorkOrdersTable();
+            this.updateFieldStats();
             this.updateRoleSpecificData();
             this.setupElectricalCharts();
-            this.populateWorkOrdersTable();
 
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -345,11 +346,11 @@ class ElectricalComplaintApp {
     }
 
 
-    renderPriorityComplaints() {
+    renderPriorityComplaints(branchId = '68d2313575e54d73f0440030') {
         const priorityOrder = { 'Emergency': 4, 'Critical': 3, 'High': 2, 'Medium': 1, 'Low': 0 };
 
         const filtered = this.data.complaints
-            .filter(c => c.status !== 'Resolved')
+            .filter(c => c.status !== 'Resolved' && c.branch === branchId)
             .sort((a, b) => (priorityOrder[b.priority] || 0) - (priorityOrder[a.priority] || 0))
             .slice(0, 3);
 
@@ -373,20 +374,21 @@ class ElectricalComplaintApp {
                 <td><span class="status status--${(c.status || '').toLowerCase().replace(/\\s/g, '-') }">${c.status || ''}</span></td>
                 <td class="work-order">${c.workOrderId || ''}</td>
                 <td>
-                    <button class="btn btn--sm btn--primary">Update</button>w
+                    <button class="btn btn--sm btn--primary">Update</button>
                 </td>
             `;
             tbody.appendChild(tr);
         });
     }
 
-    updateDashboardStats() {
-        const complaints = this.data.complaints || [];
-
-        document.getElementById('statEmergency').textContent = complaints.filter(c => c.priority === 'Critical').length;
-        document.getElementById('statHigh').textContent = complaints.filter(c => c.priority === 'High').length;
-        document.getElementById('statPending').textContent = complaints.filter(c => c.status === 'Pending').length;
-        document.getElementById('statWorkOrders').textContent = complaints.filter(c => c.workOrderNumber).length;
+    updateDashboardStats(branchId = '68d2313575e54d73f0440030') {
+        const stats = document.querySelectorAll('.stat-number');
+        if (stats.length >= 4) {
+            stats[0].textContent = this.data.complaints.filter(c => c.priority === 'Critical' && c.branch===branchId).length;
+            stats[1].textContent = this.data.complaints.filter(c => c.priority === 'High' && c.branch===branchId).length;
+            stats[2].textContent = this.data.complaints.filter(c => c.workOrderNumber && c.branch===branchId).length;
+            stats[3].textContent = this.data.complaints.filter(c => c.status === 'Pending' && c.branch===branchId).length;
+        }
     }
 
 
@@ -748,14 +750,16 @@ class ElectricalComplaintApp {
         }
     }
 
-    renderElectricalComplaints() {
+    renderElectricalComplaints(branchId="68d2313575e54d73f0440030") {
         const tbody = document.getElementById('complaintsTableBody');
         if (!tbody) return;
 
         tbody.innerHTML = ''; 
 
-        this.data.complaints.forEach(complaint => {
-            const row = this.createElectricalComplaintRow(complaint);
+        this.data.complaints
+        .filter(complaint => (complaint.branch) === branchId)
+        .forEach(complaint => {
+            const row = this.createElectricalComplaintRow   (complaint);
             tbody.appendChild(row);
         });
     }
@@ -1622,6 +1626,7 @@ Consumer Support: 9498794987
         switch (this.currentRole) {
             case 'local':
                 this.updateLocalOfficeData();
+                this.updateDashboardStats();
                 break;
             case 'department':
                 this.updateDepartmentData();
@@ -1632,16 +1637,9 @@ Consumer Support: 9498794987
         }
     }
 
-    updateLocalOfficeData() {
-        // Update T Nagar EB Office specific data
-        const stats = document.querySelectorAll('.stat-number');
-        if (stats.length >= 4) {
-            stats[0].textContent = this.data.complaints.filter(c => c.priority === 'Emergency').length;
-            stats[1].textContent = this.data.complaints.filter(c => c.priority === 'High').length;
-            stats[2].textContent = this.data.complaints.filter(c => c.workOrderNumber).length;
-            stats[3].textContent = this.data.performance.tNagarOffice.pending;
-        }
-    }
+    // updateLocalOfficeData() {
+    //     // Update T Nagar EB Office specific data
+    // }
 
     updateDepartmentData() {
         // Update Chennai EDC data

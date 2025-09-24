@@ -2622,7 +2622,7 @@
   
   .nav-items {
     display: none;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: var(--space-4);
   }
   
@@ -2631,7 +2631,7 @@
   }
 
   .nav-items-6 {
-      grid-template-columns: repeat(6, 1fr);
+      grid-template-columns: repeat(5, 1fr);
   }
     
   .nav-item {

@@ -584,12 +584,12 @@
         const eyeOffIcon2 = document.getElementById('eyeOffIcon2');
 
         // API Configuration
-        const API_BASE_URL = 'http://localhost:3000/api';
+        const API_BASE_URL = 'https://sih25-api.vercel.app';
 
         // API Functions
         const authAPI = {
             login: async (email, password) => {
-                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -600,7 +600,7 @@
             },
 
             register: async (username, email, password) => {
-                const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
