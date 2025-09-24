@@ -1,7 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/", "destination": "/frontend/login.html" }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
-}
