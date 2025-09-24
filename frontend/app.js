@@ -769,7 +769,7 @@ class ElectricalComplaintApp {
         const statusClass = this.getElectricalStatusClass(complaint.status);
 
         row.innerHTML = `
-            <td class="complaint-id">${complaint.id}</td>
+            <td class="complaint-id">${complaint.complaintId}</td>
             <td class="complaint-issue">
                 <strong>${complaint.title}</strong>
                 <br><small>${complaint.description}</small>
