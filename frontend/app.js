@@ -293,6 +293,8 @@ class ElectricalComplaintApp {
             }
 
             // Re-render UI with new data
+            
+            
             this.renderElectricalComplaints();
             this.updateRoleSpecificData();
             this.setupElectricalCharts();
@@ -605,17 +607,23 @@ class ElectricalComplaintApp {
         }
     }
 
-    renderElectricalComplaints() {
+    renderElectricalComplaints(branchId = "68d2313575e54d73f0440030") {
+    //const ebTnagar =  Branch.findOne({ _id: branchId });
+    
     const tbody = document.getElementById('complaintsTableBody');
     if (!tbody) return;
 
-    tbody.innerHTML = ''; 
-
-    this.data.complaints.forEach(complaint => {
-        const row = this.createElectricalComplaintRow(complaint);
-        tbody.appendChild(row);
-    });
+    tbody.innerHTML = '';
+console.log(this.data.complaints);
+    this.data.complaints
+        .filter(complaint => (complaint.branch || "t_nagar") === branchId)
+        .forEach(complaint => {
+            const row = this.createElectricalComplaintRow(complaint);
+            //console.log('Created row for complaint:', complaint.id,);
+            tbody.appendChild(row);
+        });
 }
+
 
 createElectricalComplaintRow(complaint) {
     const row = document.createElement('tr');
@@ -626,7 +634,7 @@ createElectricalComplaintRow(complaint) {
     const statusClass = this.getElectricalStatusClass(complaint.status);
 
     row.innerHTML = `
-        <td class="complaint-id">${complaint.id}</td>
+        <td class="complaint-id">${complaint.complaintid}</td>
         <td class="complaint-issue">
             <strong>${complaint.title}</strong>
             <br><small>${complaint.description}</small>

@@ -7,6 +7,10 @@ const departmentRoutes = require('./departmentRoutes');
 const branchRoutes = require('./branchRoutes');
 const employeeRoutes = require('./employeeRoutes');
 const fieldworkRoutes = require('./fieldworkRoutes');
+const authRoutes = require('./authroutes');
+
+router.use('/auth', authRoutes);
+
 
 router.use('/complaints', complaintRoutes);
 router.use('/users', userRoutes);
