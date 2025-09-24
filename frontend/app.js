@@ -19,9 +19,9 @@ class ElectricalComplaintApp {
             // complaints: [
             //     {
             //         id: "TNE2025001",
-            //         title: "Street Light Not Working - Pondy Bazaar",
-            //         description: "Street light pole number PB-45 on Pondy Bazaar main road has been non-functional for 4 days. LED bulb seems damaged. Causing safety issues for shoppers and pedestrians during evening hours.",
-            //         location: "Pondy Bazaar, T Nagar",
+            //         title: "Street Light Not Working - Kalavakkam",
+            //         description: "Street light pole number PB-45 on Kalavakkam main road has been non-functional for 4 days. LED bulb seems damaged. Causing safety issues for shoppers and pedestrians during evening hours.",
+            //         location: "Kalavakkam, Thiruporur",
             //         coordinates: { lat: 13.0417, lng: 80.2343 },
             //         landmark: "Near Saravana Bhavan Restaurant",
             //         poleNumber: "PB-45",
@@ -29,7 +29,7 @@ class ElectricalComplaintApp {
             //         priority: "High",
             //         category: "Street Light Maintenance",
             //         subCategory: "LED Bulb Replacement",
-            //         department: "T Nagar EB Office",
+            //         department: "Thiruporur EB Office",
             //         reportedBy: "M. Rajesh",
             //         reporterPhone: "+91 9876543210",
             //         consumerNumber: "12304567890",
@@ -45,9 +45,9 @@ class ElectricalComplaintApp {
             //     },
             //     {
             //         id: "TNE2025002",
-            //         title: "Frequent Power Cuts - Ranganathan Street",
+            //         title: "Frequent Power Cuts - Kelambakkam",
             //         description: "Experiencing 3-4 hour power cuts daily for the past week. Multiple households and shops affected. Transformer T-NG-15 seems to be overloading during peak hours.",
-            //         location: "Ranganathan Street, T Nagar", 
+            //         location: "Kelambakkam, Thiruporur", 
             //         coordinates: { lat: 13.0428, lng: 80.2341 },
             //         landmark: "Near Naidu Hall",
             //         transformerNumber: "T-NG-15",
@@ -55,7 +55,7 @@ class ElectricalComplaintApp {
             //         priority: "Critical",
             //         category: "Power Supply Issue",
             //         subCategory: "Transformer Overload",
-            //         department: "T Nagar EB Office",
+            //         department: "Thiruporur EB Office",
             //         reportedBy: "Shop Owners Association",
             //         reporterPhone: "+91 9123456789",
             //         createdDate: "2025-09-19T08:15:00Z",
@@ -73,7 +73,7 @@ class ElectricalComplaintApp {
             //         id: "TNE2025003",
             //         title: "Meter Reading Error - Habibullah Road",
             //         description: "Electricity meter showing abnormally high consumption (1200 units) this month compared to usual 300 units. No change in usage pattern. Requesting meter testing.",
-            //         location: "Habibullah Road, T Nagar",
+            //         location: "Habibullah Road, Thiruporur",
             //         coordinates: { lat: 13.0401, lng: 80.2298 },
             //         landmark: "Near Joyalukkas Showroom", 
             //         meterNumber: "HB4501234",
@@ -81,7 +81,7 @@ class ElectricalComplaintApp {
             //         priority: "Medium",
             //         category: "Meter Related",
             //         subCategory: "Billing Dispute",
-            //         department: "T Nagar EB Office",
+            //         department: "Thiruporur EB Office",
             //         reportedBy: "Mrs. Lakshmi Devi",
             //         reporterPhone: "+91 9876512345",
             //         consumerNumber: "45012340567",
@@ -100,14 +100,14 @@ class ElectricalComplaintApp {
             //         id: "TNE2025004", 
             //         title: "Voltage Fluctuation - Usman Road",
             //         description: "Severe voltage fluctuations causing damage to appliances. Voltage dropping to 180V during evening peak hours. Multiple complaints from nearby consumers.",
-            //         location: "Usman Road, T Nagar",
+            //         location: "Usman Road, Thiruporur",
             //         coordinates: { lat: 13.0445, lng: 80.2387 },
             //         landmark: "Near Spencer Plaza",
             //         status: "Open",
             //         priority: "High", 
             //         category: "Power Quality",
             //         subCategory: "Voltage Fluctuation",
-            //         department: "T Nagar EB Office",
+            //         department: "Thiruporur EB Office",
             //         reportedBy: "Apartment Association",
             //         reporterPhone: "+91 9234567890",
             //         createdDate: "2025-09-17T09:45:00Z",
@@ -123,15 +123,15 @@ class ElectricalComplaintApp {
             //     {
             //         id: "TNE2025005",
             //         title: "Cable Spark Near Bus Stop",
-            //         description: "Overhead cable sparking near T Nagar bus stop. Safety hazard for commuters. Cable insulation damaged due to tree branch contact.",
-            //         location: "T Nagar Bus Stop",
+            //         description: "Overhead cable sparking near Thiruporur bus stop. Safety hazard for commuters. Cable insulation damaged due to tree branch contact.",
+            //         location: "Thiruporur Bus Stop",
             //         coordinates: { lat: 13.0427, lng: 80.2345 },
-            //         landmark: "T Nagar Bus Terminus",
+            //         landmark: "Thiruporur Bus Terminus",
             //         status: "Resolved", 
             //         priority: "Emergency",
             //         category: "Safety Hazard",
             //         subCategory: "Cable Damage",
-            //         department: "T Nagar EB Office",
+            //         department: "Thiruporur EB Office",
             //         reportedBy: "Bus Conductor - Murugan",
             //         reporterPhone: "+91 9345678901",
             //         createdDate: "2025-09-15T11:30:00Z",
@@ -149,14 +149,14 @@ class ElectricalComplaintApp {
             //         id: "TNE2025006",
             //         title: "New Service Connection Request",
             //         description: "New commercial establishment requires 10KW 3-phase connection for textile showroom. All documents submitted, waiting for site inspection.",
-            //         location: "GN Chetty Road, T Nagar",
+            //         location: "GN Chetty Road, Thiruporur",
             //         coordinates: { lat: 13.0423, lng: 80.2378 },
             //         landmark: "Near Malar Hospital",
             //         status: "Inspection Scheduled",
             //         priority: "Medium",
             //         category: "Service Connection",
             //         subCategory: "New Connection",
-            //         department: "T Nagar EB Office",
+            //         department: "Thiruporur EB Office",
             //         reportedBy: "K. Selvam - Business Owner",
             //         reporterPhone: "+91 9567890123",
             //         createdDate: "2025-09-16T10:00:00Z",
@@ -176,22 +176,22 @@ class ElectricalComplaintApp {
                 {
                     name: "V. Subramanian",
                     designation: "Assistant Engineer/O&M",
-                    department: "T Nagar EB Office",
+                    department: "Thiruporur EB Office",
                     empId: "TNE001",
                     phone: "+91 9445850123",
-                    email: "ae.tnagar@tnebnet.org",
+                    email: "ae.thiruporur@tnebnet.org",
                     specialization: "Street Lighting & Distribution",
                     experience: "12 years",
                     currentAssignments: 8,
-                    area: "Pondy Bazaar, Ranganathan Street"
+                    area: "Kalavakkam, Kelambakkam"
                 },
                 {
                     name: "R. Ramesh Kumar",
                     designation: "Assistant Engineer/Transformer",
-                    department: "T Nagar EB Office", 
+                    department: "Thiruporur EB Office", 
                     empId: "TNE002",
                     phone: "+91 9445850124",
-                    email: "ae.transformer.tnagar@tnebnet.org",
+                    email: "ae.transformer.thiruporur@tnebnet.org",
                     specialization: "Transformer Maintenance",
                     experience: "15 years",
                     currentAssignments: 5,
@@ -213,8 +213,8 @@ class ElectricalComplaintApp {
             infrastructure: {
                 tNagarArea: {
                     transformers: [
-                        {"id": "T-NG-15", "location": "Ranganathan Street", "capacity": "250 KVA", "status": "Overloaded"},
-                        {"id": "T-NG-23", "location": "Pondy Bazaar", "capacity": "400 KVA", "status": "Normal"},
+                        {"id": "T-NG-15", "location": "Kelambakkam", "capacity": "250 KVA", "status": "Overloaded"},
+                        {"id": "T-NG-23", "location": "Kalavakkam", "capacity": "400 KVA", "status": "Normal"},
                         {"id": "T-NG-08", "location": "Usman Road", "capacity": "315 KVA", "status": "Maintenance Due"}
                     ],
                     streetLights: {
@@ -346,7 +346,7 @@ class ElectricalComplaintApp {
     }
 
 
-    renderPriorityComplaints(branchId = '68d2313575e54d73f0440030') {
+    renderPriorityComplaints(branchId = '68d3b2f46b618379b9d88bed') {
         const priorityOrder = { 'Emergency': 4, 'Critical': 3, 'High': 2, 'Medium': 1, 'Low': 0 };
 
         const filtered = this.data.complaints
@@ -381,7 +381,7 @@ class ElectricalComplaintApp {
         });
     }
 
-    updateDashboardStats(branchId = '68d2313575e54d73f0440030') {
+    updateDashboardStats(branchId = '68d3b2f46b618379b9d88bed') {
         const stats = document.querySelectorAll('.stat-number');
         if (stats.length >= 4) {
             stats[0].textContent = this.data.complaints.filter(c => c.priority === 'Critical' && c.branch===branchId).length;
@@ -429,7 +429,6 @@ class ElectricalComplaintApp {
                         <strong>${order.task || ''}</strong>
                         <br><small>${order.details || ''}</small>
                     </td>
-                    <td>${order.location || ''}</td>
                     <td>${order.assignedTo || ''}</td>
                     <td><span class="priority-badge ${order.priority?.toLowerCase() || ''}">${order.priority || ''}</span></td>
                     <td><span class="status status--${(order.status || '').toLowerCase().replace(/\s/g, '-') }">${order.status || ''}</span></td>
@@ -646,7 +645,7 @@ class ElectricalComplaintApp {
         
         const electricalTitles = {
             local: { 
-                title: 'T Nagar EB Office', 
+                title: 'Thiruporur EB Office', 
                 subtitle: 'Assistant Engineer - TANGEDCO'
             },
             department: { 
@@ -750,7 +749,9 @@ class ElectricalComplaintApp {
         }
     }
 
-    renderElectricalComplaints(branchId="68d2313575e54d73f0440030") {
+    renderElectricalComplaints(branchId="68d3b2f46b618379b9d88bed") {
+
+        console.log
         const tbody = document.getElementById('complaintsTableBody');
         if (!tbody) return;
 
@@ -1165,7 +1166,7 @@ class ElectricalComplaintApp {
 
     updateEngineerProfile() {
         // Update engineer profile with current data
-        const staffMember = this.data.staff.find(s => s.department === "T Nagar EB Office" && s.designation.includes("Assistant Engineer"));
+        const staffMember = this.data.staff.find(s => s.department === "Thiruporur EB Office" && s.designation.includes("Assistant Engineer"));
         if (staffMember) {
             console.log(`Engineer profile updated for: ${staffMember.name}`);
         }
@@ -1507,7 +1508,7 @@ ETA: 15 minutes`);
 Emergency Numbers:
 • FOC (Fuse Off Call): 1912
 • Emergency Repair: 9445850811
-• T Nagar Office: 044-2434-1101
+• Thiruporur Office: 044-2434-1101
 • WhatsApp Reports: 9445850829
 • SE Chennai EDC: +91 9445857001
 
@@ -1532,7 +1533,7 @@ Current Emergency Status:
 
 FOC (Fuse Off Call): 1912
 Emergency Repair: 9445850811
-T Nagar EB Office: 044-2434-1101
+Thiruporur EB Office: 044-2434-1101
 WhatsApp Chennai: 9445850829
 Consumer Support: 9498794987
 
@@ -1546,8 +1547,8 @@ Consumer Support: 9498794987
         const notifications = `
 🔔 ELECTRICAL NOTIFICATIONS
 
-• New transformer overload alert - Ranganathan Street
-• Street light repair completed - Pondy Bazaar  
+• New transformer overload alert - Kelambakkam
+• Street light repair completed - Kalavakkam  
 • Power quality issue reported - Usman Road
 • Work order WO/TNE/2025/0046 in progress
 • Monthly safety inspection due
@@ -1561,23 +1562,23 @@ Consumer Support: 9498794987
 
     showOfficeDetails(officeName) {
         const officeData = {
-            'T Nagar EB Office': {
+            'Thiruporur EB Office': {
                 performance: '91%',
                 pending: '22',
                 staff: '12',
-                coverage: 'Pondy Bazaar, Ranganathan Street, Usman Road'
+                coverage: 'Kalavakkam, Kelambakkam, Usman Road'
             },
-            'Mylapore EB Office': {
+            'Kelambakkam EB Office': {
                 performance: '88%',
                 pending: '28',
                 staff: '10',
-                coverage: 'Mylapore, Mandaveli, Luz'
+                coverage: 'Kelambakkam, Mandaveli, Luz'
             },
             'Adyar EB Office': {
                 performance: '85%',
                 pending: '35',
                 staff: '14',
-                coverage: 'Adyar, Besant Nagar, Thiruvanmiyur'
+                coverage: 'Adyar, BesanThiruporur, Thiruvanmiyur'
             }
         };
         
@@ -1589,7 +1590,7 @@ Consumer Support: 9498794987
 
     showInfrastructureDetails(infraType) {
         const infraData = {
-            'Transformers': 'T Nagar Area: 3 Active, 1 Overloaded (T-NG-15), 1 Maintenance Due (T-NG-08)',
+            'Transformers': 'Thiruporur Area: 3 Active, 1 Overloaded (T-NG-15), 1 Maintenance Due (T-NG-08)',
             'Street Lights': '245 Total, 221 Functional, 24 Need Repair, 180 LED Upgraded',
             'Service Connections': '14,835 Active (12,450 Domestic, 2,340 Commercial, 45 Industrial)'
         };
@@ -1638,7 +1639,7 @@ Consumer Support: 9498794987
     }
 
     // updateLocalOfficeData() {
-    //     // Update T Nagar EB Office specific data
+    //     // Update Thiruporur EB Office specific data
     // }
 
     updateDepartmentData() {

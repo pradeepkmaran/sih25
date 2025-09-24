@@ -11,7 +11,7 @@
     <!-- Role Switcher (Hidden for prototype) -->
     <div class="role-switcher" id="roleSwitcher">
         <select id="roleSelect" class="form-control">
-            <option value="local">T Nagar EB Office - Local Unit</option>
+            <option value="local">Thiruporur EB Office - Local Unit</option>
             <option value="department">TANGEDCO Chennai EDC - Department Board</option>
             <option value="central">Chennai Corporation - Central Authority</option>
         </select>
@@ -22,7 +22,7 @@
         <div class="header-content">
             <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23013d5b' stroke='%23fff' stroke-width='2'/%3E%3Ctext x='16' y='12' text-anchor='middle' fill='white' font-family='Arial' font-size='8' font-weight='bold'%3EEBCO%3C/text%3E%3Ctext x='16' y='22' text-anchor='middle' fill='white' font-family='Arial' font-size='6'%3ETNEB%3C/text%3E%3C/svg%3E" alt="TANGEDCO" class="header-logo">
             <div class="header-title">
-                <h1 id="headerTitle">T Nagar EB Office</h1>
+                <h1 id="headerTitle">Thiruporur EB Office</h1>
                 <span id="headerSubtitle">Electrical Complaint Management</span>
             </div>
             <button class="notification-btn" id="notificationBtn">
@@ -43,13 +43,13 @@
     <!-- Main Content Container -->
     <main class="main-content" id="mainContent">
         
-        <!-- Local Unit Views - T Nagar EB Office -->
+        <!-- Local Unit Views - Thiruporur EB Office -->
         <div class="view local-view active" id="localView">
             <!-- Dashboard -->
             <div class="page active" id="localDashboard">
                 <div class="page-header">
-                    <h2>T Nagar EB Office Dashboard</h2>
-                    <p>Assistant Engineer/O&M - Area Coverage: Pondy Bazaar, Ranganathan Street</p>
+                    <h2>Thiruporur EB Office Dashboard</h2>
+                    <p>Assistant Engineer/O&M - Area Coverage: Kalavakkam, Kelambakkam</p>
                 </div>
                 
                 <div class="stats-grid">
@@ -76,7 +76,7 @@
                 </div>
                 <div class="map-dashboard-section">
                     <div class="section-header">
-                        <h3>T Nagar Area Status Map</h3>
+                        <h3>Thiruporur Area Status Map</h3>
                         <div class="map-controls">
                             <button class="map-toggle-btn active" data-view="street">Street View</button>
                             <button class="map-toggle-btn" data-view="density">Density View</button>
@@ -95,8 +95,8 @@
                                 <div class="map-road secondary-road vertical" style="left: 65%; width: 6px;"></div>
 
                                 <!-- Area Labels -->
-                                <div class="area-label main" style="top: 28%; left: 8%;">Pondy Bazaar</div>
-                                <div class="area-label" style="top: 48%; left: 8%;">Ranganathan Street</div>
+                                <div class="area-label main" style="top: 28%; left: 8%;">Kalavakkam</div>
+                                <div class="area-label" style="top: 48%; left: 8%;">Kelambakkam</div>
                                 <div class="area-label" style="top: 68%; left: 8%;">Usman Road</div>
                                 <div class="area-label vertical" style="top: 8%; left: 18%;">GN Chetty Road</div>
                                 <div class="area-label vertical" style="top: 8%; left: 58%;">Habibullah Road</div>
@@ -167,7 +167,7 @@
                                 <div class="density-zone low-zone" style="top: 70%; left: 10%; width: 75px; height: 75px;"></div>
 
                                 <!-- Area Labels on Density Map -->
-                                <div class="density-label" style="top: 28%; left: 8%;">Pondy Bazaar</div>
+                                <div class="density-label" style="top: 28%; left: 8%;">Kalavakkam</div>
                                 <div class="density-label" style="top: 48%; left: 8%;">Ranganathan St.</div>
                                 <div class="density-label" style="top: 68%; left: 8%;">Usman Road</div>
                             </div>
@@ -221,7 +221,7 @@
                             <tr class="complaint-row priority-critical">
                                 <td class="complaint-id">TNE2025002</td>
                                 <td class="complaint-issue">
-                                    <strong>Power Cuts - Ranganathan Street</strong>
+                                    <strong>Power Cuts - Kelambakkam</strong>
                                     <br><small>Transformer T-NG-15 overloading. 120 consumers affected</small>
                                 </td>
                                 <td>
@@ -238,7 +238,7 @@
                             <tr class="complaint-row priority-high">
                                 <td class="complaint-id">TNE2025001</td>
                                 <td class="complaint-issue">
-                                    <strong>Street Light Not Working - Pondy Bazaar</strong>
+                                    <strong>Street Light Not Working - Kalavakkam</strong>
                                     <br><small>LED bulb damaged in pole PB-45</small>
                                 </td>
                                 <td>
@@ -347,7 +347,7 @@
                                 <tr>
                                     <th>Work Order ID</th>
                                     <th>Task & Details</th>
-                                    <th>Location</th>
+                                    <!-- <th>Location</th> -->
                                     <th>Assigned To</th>
                                     <th>Priority</th>
                                     <th>Status</th>
@@ -408,7 +408,7 @@
                                 <strong>Dr. S. Muralidharan - SE Chennai EDC</strong>
                                 <span class="message-time">30 min ago</span>
                             </div>
-                            <p>Priority alert: Multiple transformer overload reports. Need immediate action plan for Ranganathan Street area.</p>
+                            <p>Priority alert: Multiple transformer overload reports. Need immediate action plan for Kelambakkam area.</p>
                             <div class="message-actions">
                                 <button class="btn btn--sm btn--outline">Reply</button>
                                 <button class="btn btn--sm btn--primary">Send Report</button>
@@ -435,7 +435,7 @@
                                 <strong>M. Rajesh (Consumer: 12304567890)</strong>
                                 <span class="message-time">1 hour ago</span>
                             </div>
-                            <p>Thank you for fixing the street light on Pondy Bazaar. Much appreciated!</p>
+                            <p>Thank you for fixing the street light on Kalavakkam. Much appreciated!</p>
                             <div class="message-actions">
                                 <button class="btn btn--sm btn--outline">Reply</button>
                                 <button class="btn btn--sm btn--outline">Send SMS Update</button>
@@ -491,7 +491,7 @@
                     <div class="profile-info">
                         <h3>V. Subramanian</h3>
                         <p>Assistant Engineer/O&M</p>
-                        <p>T Nagar EB Office - TANGEDCO</p>
+                        <p>Thiruporur EB Office - TANGEDCO</p>
                         <p>Employee ID: TNE001</p>
                     </div>
                 </div>
@@ -516,14 +516,14 @@
                         <h4>Contact Information</h4>
                         <div class="contact-info">
                             <span><i class="fas fa-phone"></i> +91 9445850123</span>
-                            <span><i class="fas fa-envelope"></i> ae.tnagar@tnebnet.org</span>
+                            <span><i class="fas fa-envelope"></i> ae.thiruporur@tnebnet.org</span>
                         </div>
                     </div>
                     <div class="detail-section">
                         <h4>Area Coverage</h4>
                         <div class="coverage-areas">
-                            <span class="area-tag">Pondy Bazaar</span>
-                            <span class="area-tag">Ranganathan Street</span>
+                            <span class="area-tag">Kalavakkam</span>
+                            <span class="area-tag">Kelambakkam</span>
                             <span class="area-tag">Usman Road</span>
                         </div>
                     </div>
@@ -545,7 +545,7 @@
                             <span class="emergency-number">9445850811</span>
                         </div>
                         <div class="emergency-item">
-                            <span class="emergency-label">T Nagar Office</span>
+                            <span class="emergency-label">Thiruporur Office</span>
                             <span class="emergency-number">044-2434-1101</span>
                         </div>
                     </div>
@@ -593,7 +593,7 @@
                     <h3>EB Office Performance</h3>
                     <div class="office-list">
                         <div class="office-item">
-                            <div class="office-name">T Nagar EB Office</div>
+                            <div class="office-name">Thiruporur EB Office</div>
                             <div class="office-progress">
                                 <div class="progress-bar">
                                     <div class="progress-fill" style="width: 91%"></div>
@@ -602,7 +602,7 @@
                             </div>
                         </div>
                         <div class="office-item">
-                            <div class="office-name">Mylapore EB Office</div>
+                            <div class="office-name">Kelambakkam EB Office</div>
                             <div class="office-progress">
                                 <div class="progress-bar">
                                     <div class="progress-fill" style="width: 88%"></div>
@@ -716,7 +716,7 @@
                 </div>
 
                 <div class="infrastructure-status">
-                    <h3>T Nagar Infrastructure Status</h3>
+                    <h3>Thiruporur Infrastructure Status</h3>
                     <div class="infrastructure-grid">
                         <div class="infra-item">
                             <i class="fas fa-bolt"></i>
@@ -750,10 +750,10 @@
                     <div class="mock-territory-map">
                         <div class="territory-regions">
                             <div class="territory-region high-activity" style="top: 20%; left: 30%; width: 25%; height: 20%;">
-                                <span class="region-label">T Nagar<br>High Activity</span>
+                                <span class="region-label">Thiruporur<br>High Activity</span>
                             </div>
                             <div class="territory-region medium-activity" style="top: 50%; left: 60%; width: 30%; height: 25%;">
-                                <span class="region-label">Mylapore<br>Medium Activity</span>
+                                <span class="region-label">Kelambakkam<br>Medium Activity</span>
                             </div>
                             <div class="territory-region low-activity" style="top: 70%; left: 10%; width: 20%; height: 15%;">
                                 <span class="region-label">Adyar<br>Low Activity</span>
@@ -855,7 +855,7 @@
                                 <strong>Dr. S. Muralidharan - SE Chennai EDC</strong>
                                 <span class="message-time">30 min ago</span>
                             </div>
-                            <p>Priority alert: Multiple transformer overload reports. Need immediate action plan for Ranganathan Street area.</p>
+                            <p>Priority alert: Multiple transformer overload reports. Need immediate action plan for Kelambakkam area.</p>
                             <div class="message-actions">
                                 <button class="btn btn--sm btn--outline">Reply</button>
                                 <button class="btn btn--sm btn--primary">Send Report</button>
@@ -882,7 +882,7 @@
                                 <strong>M. Rajesh (Consumer: 12304567890)</strong>
                                 <span class="message-time">1 hour ago</span>
                             </div>
-                            <p>Thank you for fixing the street light on Pondy Bazaar. Much appreciated!</p>
+                            <p>Thank you for fixing the street light on Kalavakkam. Much appreciated!</p>
                             <div class="message-actions">
                                 <button class="btn btn--sm btn--outline">Reply</button>
                                 <button class="btn btn--sm btn--outline">Send SMS Update</button>
@@ -1079,7 +1079,7 @@
                         <div class="planning-projects">
                             <div class="project-card">
                                 <h4>Smart Grid Implementation - Phase 1</h4>
-                                <p>Digital transformation of electrical distribution in T Nagar and Mylapore areas.</p>
+                                <p>Digital transformation of electrical distribution in Thiruporur and Kelambakkam areas.</p>
                                 <div class="project-meta">
                                     <span><i class="fas fa-calendar"></i> Q4 2025 - Q2 2026</span>
                                     <span><i class="fas fa-rupee-sign"></i> ₹45 Crores</span>
@@ -1181,8 +1181,8 @@
                                 <label class="form-label">Coverage Area</label>
                                 <select class="form-control">
                                     <option>Entire Chennai EDC</option>
-                                    <option>T Nagar EB Office</option>
-                                    <option>Mylapore EB Office</option>
+                                    <option>Thiruporur EB Office</option>
+                                    <option>Kelambakkam EB Office</option>
                                     <option>Adyar EB Office</option>
                                 </select>
                             </div>
@@ -1274,7 +1274,7 @@
                                 <strong>Dr. S. Muralidharan - SE Chennai EDC</strong>
                                 <span class="message-time">30 min ago</span>
                             </div>
-                            <p>Priority alert: Multiple transformer overload reports. Need immediate action plan for Ranganathan Street area.</p>
+                            <p>Priority alert: Multiple transformer overload reports. Need immediate action plan for Kelambakkam area.</p>
                             <div class="message-actions">
                                 <button class="btn btn--sm btn--outline">Reply</button>
                                 <button class="btn btn--sm btn--primary">Send Report</button>
@@ -1301,7 +1301,7 @@
                                 <strong>M. Rajesh (Consumer: 12304567890)</strong>
                                 <span class="message-time">1 hour ago</span>
                             </div>
-                            <p>Thank you for fixing the street light on Pondy Bazaar. Much appreciated!</p>
+                            <p>Thank you for fixing the street light on Kalavakkam. Much appreciated!</p>
                             <div class="message-actions">
                                 <button class="btn btn--sm btn--outline">Reply</button>
                                 <button class="btn btn--sm btn--outline">Send SMS Update</button>
@@ -1348,7 +1348,7 @@
 
     <!-- Bottom Navigation -->
     <nav class="bottom-nav" id="bottomNav">
-        <!-- Local Unit Navigation - T Nagar EB Office -->
+        <!-- Local Unit Navigation - Thiruporur EB Office -->
         <div class="nav-items local-nav active" id="localNav">
             <button class="nav-item active" data-page="localDashboard">
                 <i class="fas fa-tachometer-alt"></i>
