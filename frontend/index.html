@@ -3,1437 +3,826 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TANGEDCO - Electrical Complaint Management</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Government Portal - Login</title>
+    <style>
+        /* Reset and base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, rgba(255, 153, 51, 0.1) 0%, rgba(19, 136, 8, 0.1) 50%, rgba(0, 70, 151, 0.1) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="ashoka" patternUnits="userSpaceOnUse" width="50" height="50"><circle cx="25" cy="25" r="2" fill="%23ff9933" opacity="0.1"/><circle cx="25" cy="25" r="15" fill="none" stroke="%23138808" stroke-width="0.5" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23ashoka)"/></svg>') repeat;
+            color: #555;
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .login-wrapper {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-header {
+            text-align: center;
+            padding: 32px 32px 24px 32px;
+            background: linear-gradient(135deg, #ff9933 0%, #ffffff 50%, #138808 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+
+        .login-header > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-container {
+            margin-bottom: 16px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .ashoka-chakra {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #000080;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ashoka-chakra::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #000080;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .ashoka-chakra::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: #000080;
+            position: absolute;
+            transform: rotate(45deg);
+            box-shadow: 
+                0 0 0 0 #000080,
+                0 0 0 0 #000080 inset,
+                20px 0 0 -19px #000080,
+                -20px 0 0 -19px #000080,
+                0 20px 0 -19px #000080,
+                0 -20px 0 -19px #000080;
+        }
+
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #1e293b;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+        }
+
+        .login-subtitle {
+            font-size: 0.9rem;
+            color: #475569;
+            font-weight: 500;
+        }
+
+        .login-form-container {
+            padding: 32px;
+        }
+
+        .form-field {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 6px;
+        }
+
+        .input-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            color: #777;
+            z-index: 2;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 14px 12px 44px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: border 0.2s ease;
+            background: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #000080;
+            box-shadow: 0 0 0 3px rgba(0, 0, 128, 0.1);
+        }
+
+        .form-input.error {
+            border-color: #dc2626;
+        }
+
+        .password-input {
+            padding-right: 44px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #777;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .password-toggle:hover {
+            color: #000080;
+        }
+
+        .error-message {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #dc2626;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .general-error {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            color: #dc2626;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #000080 0%, #1a237e 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 128, 0.2);
+        }
+
+        .submit-button:hover:not(:disabled) {
+            background: linear-gradient(135deg, #1a237e 0%, #000080 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 128, 0.3);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .loading-spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .mode-toggle {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        .toggle-button {
+            background: none;
+            color: #000080;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: underline;
+        }
+
+        .toggle-button:hover:not(:disabled) {
+            color: #1a237e;
+        }
+
+        .toggle-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .additional-links {
+            text-align: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .forgot-password {
+            color: #000080;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .forgot-password:hover {
+            color: #1a237e;
+            text-decoration: underline;
+        }
+
+        .login-footer {
+            background: rgba(248, 250, 252, 0.9);
+            padding: 20px 32px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .footer-text {
+            font-size: 0.85rem;
+            color: #777;
+            font-style: italic;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* SVG Icons */
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-form-container {
+                padding: 24px;
+            }
+            
+            .login-header {
+                padding: 24px 24px 20px 24px;
+            }
+
+            .logo {
+                width: 70px;
+                height: 70px;
+            }
+
+            .ashoka-chakra {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Role Switcher (Hidden for prototype) -->
-    <div class="role-switcher" id="roleSwitcher">
-        <select id="roleSelect" class="form-control">
-            <option value="local">T Nagar EB Office - Local Unit</option>
-            <option value="department">TANGEDCO Chennai EDC - Department Board</option>
-            <option value="central">Chennai Corporation - Central Authority</option>
-        </select>
-    </div>
-
-    <!-- Header -->
-    <header class="app-header">
-        <div class="header-content">
-            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23013d5b' stroke='%23fff' stroke-width='2'/%3E%3Ctext x='16' y='12' text-anchor='middle' fill='white' font-family='Arial' font-size='8' font-weight='bold'%3EEBCO%3C/text%3E%3Ctext x='16' y='22' text-anchor='middle' fill='white' font-family='Arial' font-size='6'%3ETNEB%3C/text%3E%3C/svg%3E" alt="TANGEDCO" class="header-logo">
-            <div class="header-title">
-                <h1 id="headerTitle">T Nagar EB Office</h1>
-                <span id="headerSubtitle">Electrical Complaint Management</span>
+    <div class="login-container">
+        <div class="login-wrapper">
+            <!-- Logo and Title -->
+            <div class="login-header">
+                <div class="logo-container">
+                    <div class="logo">
+                        <div class="ashoka-chakra"></div>
+                    </div>
+                </div>
+                <h1 class="login-title">Government Portal</h1>
+                <p class="login-subtitle" id="subtitle">
+                    Integrated Departmental Services
+                </p>
             </div>
-            <button class="notification-btn" id="notificationBtn">
-                <i class="fas fa-bell"></i>
-                <span class="notification-badge" id="notificationBadge">3</span>
-            </button>
-        </div>
-    </header>
 
-    <!-- Emergency Contact Banner -->
-    <div class="emergency-banner" id="emergencyBanner">
-        <div class="emergency-content">
-            <i class="fas fa-exclamation-triangle"></i>
-            <span>Emergency: Call 1912 (FOC) | WhatsApp: 9445850829</span>
-        </div>
-    </div>
-
-    <!-- Main Content Container -->
-    <main class="main-content" id="mainContent">
-        
-        <!-- Local Unit Views - T Nagar EB Office -->
-        <div class="view local-view active" id="localView">
-            <!-- Dashboard -->
-            <div class="page active" id="localDashboard">
-                <div class="page-header">
-                    <h2>T Nagar EB Office Dashboard</h2>
-                    <p>Assistant Engineer/O&M - Area Coverage: Pondy Bazaar, Ranganathan Street</p>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card priority-critical">
-                        <div class="stat-number" id="statEmergency">0</div>
-                        <div class="stat-label">Emergency</div>
-                        <div class="stat-icon"><i class="fas fa-bolt"></i></div>
-                    </div>
-                    <div class="stat-card priority-high">
-                        <div class="stat-number" id="statHigh">0</div>
-                        <div class="stat-label">High Priority</div>
-                        <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
-                    </div>
-                    <div class="stat-card priority-medium">
-                        <div class="stat-number" id="statWorkOrders">0</div>
-                        <div class="stat-label">Work Orders</div>
-                        <div class="stat-icon"><i class="fas fa-tools"></i></div>
-                    </div>
-                    <div class="stat-card priority-low">
-                        <div class="stat-number" id="statPending">0</div>
-                        <div class="stat-label">Pending</div>
-                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
-                    </div>
-                </div>
-                <div class="map-dashboard-section">
-                    <div class="section-header">
-                        <h3>T Nagar Area Status Map</h3>
-                        <div class="map-controls">
-                            <button class="map-toggle-btn active" data-view="street">Street View</button>
-                            <button class="map-toggle-btn" data-view="density">Density View</button>
-                        </div>
-                    </div>
-                    
-                    <div class="dashboard-map-container">
-                        <!-- Street Map View -->
-                        <div class="dashboard-map-view active" id="streetMapView">
-                            <div class="map-canvas">
-                                <!-- Main Roads -->
-                                <div class="map-road main-road horizontal" style="top: 35%; height: 8px;"></div>
-                                <div class="map-road secondary-road horizontal" style="top: 55%; height: 6px;"></div>
-                                <div class="map-road secondary-road horizontal" style="top: 75%; height: 6px;"></div>
-                                <div class="map-road main-road vertical" style="left: 25%; width: 8px;"></div>
-                                <div class="map-road secondary-road vertical" style="left: 65%; width: 6px;"></div>
-
-                                <!-- Area Labels -->
-                                <div class="area-label main" style="top: 28%; left: 8%;">Pondy Bazaar</div>
-                                <div class="area-label" style="top: 48%; left: 8%;">Ranganathan Street</div>
-                                <div class="area-label" style="top: 68%; left: 8%;">Usman Road</div>
-                                <div class="area-label vertical" style="top: 8%; left: 18%;">GN Chetty Road</div>
-                                <div class="area-label vertical" style="top: 8%; left: 58%;">Habibullah Road</div>
-
-                                <!-- Buildings/Blocks -->
-                                <div class="building-block" style="top: 20%; left: 35%; width: 25%; height: 12%;"></div>
-                                <div class="building-block" style="top: 40%; left: 35%; width: 25%; height: 12%;"></div>
-                                <div class="building-block" style="top: 60%; left: 35%; width: 25%; height: 12%;"></div>
-                                <div class="building-block" style="top: 40%; left: 70%; width: 25%; height: 15%;"></div>
-
-                                <!-- Infrastructure -->
-                                <div class="infrastructure-item transformer critical" style="top: 52%; left: 47%;" data-tooltip="T-NG-15 - Overloaded - 120 consumers">
-                                    <i class="fas fa-bolt"></i>
-                                </div>
-                                <div class="infrastructure-item transformer normal" style="top: 32%; left: 72%;" data-tooltip="T-NG-23 - Normal Operation">
-                                    <i class="fas fa-bolt"></i>
-                                </div>
-                                <div class="infrastructure-item transformer maintenance" style="top: 72%; left: 22%;" data-tooltip="T-NG-08 - Scheduled Maintenance">
-                                    <i class="fas fa-bolt"></i>
-                                </div>
-
-                                <!-- Street Lights -->
-                                <div class="infrastructure-item streetlight broken" style="top: 37%; left: 75%;" data-tooltip="Pole PB-45 - LED Bulb Damaged">
-                                    <i class="fas fa-lightbulb"></i>
-                                </div>
-                                <div class="infrastructure-item streetlight working" style="top: 57%; left: 30%;" data-tooltip="Street Light - Working">
-                                    <i class="fas fa-lightbulb"></i>
-                                </div>
-                                <div class="infrastructure-item streetlight working" style="top: 77%; left: 50%;" data-tooltip="Street Light - Working">
-                                    <i class="fas fa-lightbulb"></i>
-                                </div>
-
-                                <!-- Complaint Markers -->
-                                <div class="complaint-pin critical" style="top: 52%; left: 47%;" data-tooltip="TNE2025002 - Power Cuts - Critical">
-                                    <div class="pin-head"></div>
-                                    <div class="pin-point"></div>
-                                </div>
-                                <div class="complaint-pin high" style="top: 37%; left: 75%;" data-tooltip="TNE2025001 - Street Light - High Priority">
-                                    <div class="pin-head"></div>
-                                    <div class="pin-point"></div>
-                                </div>
-                                <div class="complaint-pin medium" style="top: 72%; left: 82%;" data-tooltip="TNE2025003 - Voltage Issues - Medium">
-                                    <div class="pin-head"></div>
-                                    <div class="pin-point"></div>
-                                </div>
-                                <div class="complaint-pin resolved" style="top: 27%; left: 40%;" data-tooltip="TNE2025005 - Cable Spark - Resolved">
-                                    <div class="pin-head"></div>
-                                    <div class="pin-point"></div>
-                                </div>
+            <!-- Login/Register Form -->
+            <div class="login-form-container">
+                <div class="form-content">
+                    <form id="authForm">
+                        <!-- Username Field (Registration only) -->
+                        <div class="form-field hidden" id="usernameField">
+                            <label for="username" class="form-label">Username</label>
+                            <div class="input-container">
+                                <svg class="icon input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    class="form-input"
+                                    placeholder="Enter your username"
+                                >
+                            </div>
+                            <div class="error-message hidden" id="usernameError">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="8" x2="12" y2="12"/>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                </svg>
+                                <span id="usernameErrorText"></span>
                             </div>
                         </div>
 
-                        <!-- Density Map View -->
-                        <div class="dashboard-map-view" id="densityMapView">
-                            <div class="density-canvas">
-                                <!-- Base Map with subtle roads -->
-                                <div class="density-road horizontal" style="top: 35%; height: 3px;"></div>
-                                <div class="density-road horizontal" style="top: 55%; height: 3px;"></div>
-                                <div class="density-road horizontal" style="top: 75%; height: 3px;"></div>
-                                <div class="density-road vertical" style="left: 25%; width: 3px;"></div>
-                                <div class="density-road vertical" style="left: 65%; width: 3px;"></div>
-
-                                <!-- Density Heat Zones -->
-                                <div class="density-zone critical-zone" style="top: 40%; left: 35%; width: 130px; height: 130px;"></div>
-                                <div class="density-zone high-zone" style="top: 25%; left: 65%; width: 90px; height: 90px;"></div>
-                                <div class="density-zone medium-zone" style="top: 65%; left: 75%; width: 80px; height: 80px;"></div>
-                                <div class="density-zone low-zone" style="top: 15%; left: 15%; width: 70px; height: 70px;"></div>
-                                <div class="density-zone low-zone" style="top: 70%; left: 10%; width: 75px; height: 75px;"></div>
-
-                                <!-- Area Labels on Density Map -->
-                                <div class="density-label" style="top: 28%; left: 8%;">Pondy Bazaar</div>
-                                <div class="density-label" style="top: 48%; left: 8%;">Ranganathan St.</div>
-                                <div class="density-label" style="top: 68%; left: 8%;">Usman Road</div>
+                        <!-- Email Field -->
+                        <div class="form-field">
+                            <label for="email" class="form-label">Email Address</label>
+                            <div class="input-container">
+                                <svg class="icon input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    class="form-input"
+                                    placeholder="Enter your email"
+                                >
                             </div>
-
-                            <!-- Density Legend -->
-                            <div class="density-legend">
-                                <div class="legend-title">Issue Density</div>
-                                <div class="legend-item">
-                                    <div class="legend-indicator critical"></div>
-                                    <span>Critical (3+ active)</span>
-                                </div>
-                                <div class="legend-item">
-                                    <div class="legend-indicator high"></div>
-                                    <span>High (2-3 issues)</span>
-                                </div>
-                                <div class="legend-item">
-                                    <div class="legend-indicator medium"></div>
-                                    <span>Medium (1-2 issues)</span>
-                                </div>
-                                <div class="legend-item">
-                                    <div class="legend-indicator low"></div>
-                                    <span>Low (0-1 issues)</span>
-                                </div>
+                            <div class="error-message hidden" id="emailError">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="8" x2="12" y2="12"/>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                </svg>
+                                <span id="emailErrorText"></span>
                             </div>
                         </div>
 
-                        <!-- Map Tooltip -->
-                        <div class="map-tooltip" id="mapTooltip"></div>
+                        <!-- Password Field -->
+                        <div class="form-field">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-container">
+                                <svg class="icon input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <circle cx="12" cy="16" r="1"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-input password-input"
+                                    placeholder="Enter your password"
+                                >
+                                <button type="button" class="password-toggle" id="passwordToggle">
+                                    <svg class="icon" id="eyeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                    <svg class="icon hidden" id="eyeOffIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                                        <line x1="1" y1="1" x2="23" y2="23"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="error-message hidden" id="passwordError">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="8" x2="12" y2="12"/>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                </svg>
+                                <span id="passwordErrorText"></span>
+                            </div>
+                        </div>
+
+                        <!-- Confirm Password Field (Registration only) -->
+                        <div class="form-field hidden" id="confirmPasswordField">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <div class="input-container">
+                                <svg class="icon input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <circle cx="12" cy="16" r="1"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                <input
+                                    type="password"
+                                    id="confirmPassword"
+                                    name="confirmPassword"
+                                    class="form-input password-input"
+                                    placeholder="Confirm your password"
+                                >
+                                <button type="button" class="password-toggle" id="confirmPasswordToggle">
+                                    <svg class="icon" id="eyeIcon2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                        <circle cx="12" cy="12" r="3"/>
+                                    </svg>
+                                    <svg class="icon hidden" id="eyeOffIcon2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                                        <line x1="1" y1="1" x2="23" y2="23"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="error-message hidden" id="confirmPasswordError">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="8" x2="12" y2="12"/>
+                                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                                </svg>
+                                <span id="confirmPasswordErrorText"></span>
+                            </div>
+                        </div>
+
+                        <!-- General Error -->
+                        <div class="general-error hidden" id="generalError">
+                            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                            </svg>
+                            <p id="generalErrorText"></p>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="submit-button" id="submitButton">
+                            <div class="loading-content hidden" id="loadingContent">
+                                <div class="loading-spinner"></div>
+                                <span id="loadingText">Signing In...</span>
+                            </div>
+                            <span id="buttonText">Sign In</span>
+                        </button>
+                    </form>
+
+                    <!-- Mode Toggle -->
+                    <div class="mode-toggle">
+                        <p id="toggleMessage">
+                            Don't have an account? 
+                            <button type="button" class="toggle-button" id="toggleButton">
+                                Sign up
+                            </button>
+                        </p>
                     </div>
-                </div>   
-                <div class="section-title">
-                    <h3>Priority Electrical Complaints</h3>
-                    <button class="btn btn--sm btn--outline">View All</button>
                 </div>
 
-                <!-- UPDATED: TABLE STRUCTURE FOR COMPLAINTS -->
-                <div class="complaint-table-container" id="priorityComplaints">
-                    <table class="complaint-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Issue</th>
-                                <th>Location</th>
-                                <th>Priority</th>
-                                <th>Status</th>
-                                <th>Work Order</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="complaint-row priority-critical">
-                                <td class="complaint-id">TNE2025002</td>
-                                <td class="complaint-issue">
-                                    <strong>Power Cuts - Ranganathan Street</strong>
-                                    <br><small>Transformer T-NG-15 overloading. 120 consumers affected</small>
-                                </td>
-                                <td>
-                                    <i class="fas fa-map-marker-alt"></i> Near Naidu Hall
-                                    <br><small>2 days ago</small>
-                                </td>
-                                <td><span class="priority-badge critical">Critical</span></td>
-                                <td><span class="status status--warning">In Progress</span></td>
-                                <td class="work-order">WO/TNE/2025/0046</td>
-                                <td>
-                                    <button class="btn btn--sm btn--primary">Update</button>
-                                </td>
-                            </tr>
-                            <tr class="complaint-row priority-high">
-                                <td class="complaint-id">TNE2025001</td>
-                                <td class="complaint-issue">
-                                    <strong>Street Light Not Working - Pondy Bazaar</strong>
-                                    <br><small>LED bulb damaged in pole PB-45</small>
-                                </td>
-                                <td>
-                                    <i class="fas fa-lightbulb"></i> Pole PB-45
-                                    <br><small>4 days ago</small>
-                                </td>
-                                <td><span class="priority-badge high">High</span></td>
-                                <td><span class="status status--info">Work Order Issued</span></td>
-                                <td class="work-order">WO/TNE/2025/0045</td>
-                                <td>
-                                    <button class="btn btn--sm btn--outline">View</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="recent-activity">
-                    <h3>Recent Field Activity</h3>
-                    <div class="activity-list">
-                        <!-- JS will insert recent activity items here -->
-                    </div>
+                <!-- Additional Links -->
+                <div class="additional-links" id="additionalLinks">
+                    <a href="#" class="forgot-password">
+                        Forgot your password?
+                    </a>
                 </div>
             </div>
+
+            <!-- Footer -->
+            <div class="login-footer">
+                <p class="footer-text">
+                    © 2025 Government of India. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let isLogin = true;
+        let isLoading = false;
+
+        // Elements
+        const form = document.getElementById('authForm');
+        const subtitle = document.getElementById('subtitle');
+        const usernameField = document.getElementById('usernameField');
+        const confirmPasswordField = document.getElementById('confirmPasswordField');
+        const submitButton = document.getElementById('submitButton');
+        const buttonText = document.getElementById('buttonText');
+        const loadingContent = document.getElementById('loadingContent');
+        const loadingText = document.getElementById('loadingText');
+        const toggleButton = document.getElementById('toggleButton');
+        const toggleMessage = document.getElementById('toggleMessage');
+        const additionalLinks = document.getElementById('additionalLinks');
+        const generalError = document.getElementById('generalError');
+        const generalErrorText = document.getElementById('generalErrorText');
+
+        // Password toggles
+        const passwordToggle = document.getElementById('passwordToggle');
+        const confirmPasswordToggle = document.getElementById('confirmPasswordToggle');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const eyeIcon = document.getElementById('eyeIcon');
+        const eyeOffIcon = document.getElementById('eyeOffIcon');
+        const eyeIcon2 = document.getElementById('eyeIcon2');
+        const eyeOffIcon2 = document.getElementById('eyeOffIcon2');
+
+        // API Configuration
+        const API_BASE_URL = 'https://sih25-api.vercel.app';
+
+        // API Functions
+        const authAPI = {
+            login: async (email, password) => {
+                const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+                return response.json();
+            },
+
+            register: async (username, email, password) => {
+                const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, email, password }),
+                });
+                return response.json();
+            }
+        };
+
+        // Utility Functions
+        function showError(fieldId, message) {
+            const errorElement = document.getElementById(`${fieldId}Error`);
+            const errorTextElement = document.getElementById(`${fieldId}ErrorText`);
+            const inputElement = document.getElementById(fieldId);
             
-            <!-- Electrical Complaints -->
-            <div class="page" id="localComplaints">
-                <div class="page-header">
-                    <h2>Electrical Complaints</h2>
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search by pole number, transformer..." class="form-control" id="complaintSearch">
-                        <i class="fas fa-search search-icon"></i>
-                    </div>
-                </div>
-
-                <div class="filters-bar">
-                    <select class="form-control filter-select" id="categoryFilter">
-                        <option value="">All Categories</option>
-                        <option value="street-light">Street Light Issues</option>
-                        <option value="power-supply">Power Supply Problems</option>
-                        <option value="transformer">Transformer Issues</option>
-                        <option value="meter">Meter Related</option>
-                        <option value="cable">Cable/Infrastructure</option>
-                        <option value="service">Service Connections</option>
-                    </select>
-                    <select class="form-control filter-select" id="statusFilter">
-                        <option value="">All Status</option>
-                        <option value="open">Open</option>
-                        <option value="verified">Verified</option>
-                        <option value="work-order">Work Order</option>
-                        <option value="in-progress">In Progress</option>
-                        <option value="testing">Testing</option>
-                        <option value="resolved">Resolved</option>
-                    </select>
-                </div>
-
-                <!-- UPDATED: TABLE STRUCTURE FOR ALL COMPLAINTS -->
-                <div class="complaint-table-container detailed" id="allComplaints">
-                    <table class="complaint-table">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Issue & Description</th>
-                            <th>Location & Time</th>
-                            <th>Category</th>
-                            <th>Priority</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody id="complaintsTableBody">
-                        <!-- JS will insert rows here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Field Work -->
-            <div class="page" id="localFieldWork">
-                <div class="page-header">
-                    <h2>Field Work Management</h2>
-                    <button class="btn btn--sm btn--primary">Create Work Order</button>
-                </div>
-
-                <div class="field-stats">
-                    <div class="field-stat">
-                        <span class="field-number" id="activeWorkOrders">0</span>
-                        <span class="field-label">Active Work Orders</span>
-                    </div>
-                    <div class="field-stat">
-                        <span class="field-number" id="emergencyCalls">0</span>
-                        <span class="field-label">Emergency Calls</span>
-                    </div>
-                    <div class="field-stat">
-                        <span class="field-number" id="scheduledToday">0</span>
-                        <span class="field-label">Scheduled Today</span>
-                    </div>
-                </div>
-
-                <!-- UPDATED: TABLE STRUCTURE FOR WORK ORDERS -->
-                 <div class="work-orders detailed" id="allComplaints">
-                    <h3>Today's Work Orders</h3>
-                    <div class="work-order-table-container">
-                        <table class="work-order-table">
-                            <thead>
-                                <tr>
-                                    <th>Work Order ID</th>
-                                    <th>Task & Details</th>
-                                    <th>Location</th>
-                                    <th>Assigned To</th>
-                                    <th>Priority</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="work-order-table">
-                            <!-- JS will insert rows here -->
-                            </tbody>
-                    </table>
-                </div>
-
-                <!-- <div class="equipment-tracking">
-                    <h3>Equipment & Materials</h3>
-                    <div class="equipment-grid">
-                        <div class="equipment-item">
-                            <i class="fas fa-lightbulb"></i>
-                            <span class="equipment-name">LED Bulbs</span>
-                            <span class="equipment-stock">24 available</span>
-                        </div>
-                        <div class="equipment-item">
-                            <i class="fas fa-bolt"></i>
-                            <span class="equipment-name">Fuses</span>
-                            <span class="equipment-stock">45 available</span>
-                        </div>
-                        <div class="equipment-item">
-                            <i class="fas fa-plug"></i>
-                            <span class="equipment-name">Cables</span>
-                            <span class="equipment-stock">200m available</span>
-                        </div>
-                        <div class="equipment-item low-stock">
-                            <i class="fas fa-battery-quarter"></i>
-                            <span class="equipment-name">Transformers</span>
-                            <span class="equipment-stock">2 available</span>
-                        </div>
-                    </div>
-                </div> -->
-                
-                </div> 
-            </div> 
-            <!-- Communication -->
-            <!-- <div class="page" id="localCommunication">
-                <div class="page-header">
-                    <h2>Communication Hub</h2>
-                    <button class="btn btn--sm btn--primary">New Message</button>
-                </div>
-
-                <div class="communication-tabs">
-                    <button class="tab-btn active" data-tab="internal">TANGEDCO Internal</button>
-                    <button class="tab-btn" data-tab="citizens">Citizens</button>
-                    <button class="tab-btn" data-tab="whatsapp">WhatsApp Updates</button>
-                </div>
-
-                <div class="tab-content active" id="internal">
-                    <div class="message-list">
-                        <div class="message-item urgent">
-                            <div class="message-header">
-                                <strong>Dr. S. Muralidharan - SE Chennai EDC</strong>
-                                <span class="message-time">30 min ago</span>
-                            </div>
-                            <p>Priority alert: Multiple transformer overload reports. Need immediate action plan for Ranganathan Street area.</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--primary">Send Report</button>
-                            </div>
-                        </div>
-                        <div class="message-item">
-                            <div class="message-header">
-                                <strong>AE Ramesh Kumar - Transformer Team</strong>
-                                <span class="message-time">2 hours ago</span>
-                            </div>
-                            <p>Transformer T-NG-15 load testing completed. Requires immediate load balancing. Photos uploaded to system.</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--outline">View Photos</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="citizens">
-                    <div class="message-list">
-                        <div class="message-item">
-                            <div class="message-header">
-                                <strong>M. Rajesh (Consumer: 12304567890)</strong>
-                                <span class="message-time">1 hour ago</span>
-                            </div>
-                            <p>Thank you for fixing the street light on Pondy Bazaar. Much appreciated!</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--outline">Send SMS Update</button>
-                            </div>
-                        </div>
-                        <div class="message-item">
-                            <div class="message-header">
-                                <strong>Shop Owners Association</strong>
-                                <span class="message-time">3 hours ago</span>
-                            </div>
-                            <p>Power cuts affecting business. When will transformer issue be resolved?</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--primary">Send Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="whatsapp">
-                    <div class="whatsapp-info">
-                        <div class="whatsapp-banner">
-                            <i class="fab fa-whatsapp"></i>
-                            <div class="whatsapp-details">
-                                <h4>Chennai TANGEDCO WhatsApp</h4>
-                                <p>9445850829 - For photo complaints and updates</p>
-                            </div>
-                        </div>
-                        <div class="whatsapp-stats">
-                            <div class="whatsapp-stat">
-                                <span class="whatsapp-number">156</span>
-                                <span class="whatsapp-label">Messages Today</span>
-                            </div>
-                            <div class="whatsapp-stat">
-                                <span class="whatsapp-number">42</span>
-                                <span class="whatsapp-label">Photo Complaints</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- Profile -->
-            <div class="page" id="localProfile">
-                <div class="page-header">
-                    <h2>Engineer Profile</h2>
-                </div>
-
-                <div class="profile-card">
-                    <div class="profile-avatar">
-                        <i class="fas fa-hard-hat"></i>
-                    </div>
-                    <div class="profile-info">
-                        <h3>V. Subramanian</h3>
-                        <p>Assistant Engineer/O&M</p>
-                        <p>T Nagar EB Office - TANGEDCO</p>
-                        <p>Employee ID: TNE001</p>
-                    </div>
-                </div>
-
-                <div class="profile-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">164</span>
-                        <span class="stat-label">Complaints Resolved</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">18hr</span>
-                        <span class="stat-label">Avg Resolution</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">91%</span>
-                        <span class="stat-label">Customer Satisfaction</span>
-                    </div>
-                </div>
-
-                <div class="engineer-details">
-                    <div class="detail-section">
-                        <h4>Contact Information</h4>
-                        <div class="contact-info">
-                            <span><i class="fas fa-phone"></i> +91 9445850123</span>
-                            <span><i class="fas fa-envelope"></i> ae.tnagar@tnebnet.org</span>
-                        </div>
-                    </div>
-                    <div class="detail-section">
-                        <h4>Area Coverage</h4>
-                        <div class="coverage-areas">
-                            <span class="area-tag">Pondy Bazaar</span>
-                            <span class="area-tag">Ranganathan Street</span>
-                            <span class="area-tag">Usman Road</span>
-                        </div>
-                    </div>
-                    <div class="detail-section">
-                        <h4>Specialization</h4>
-                        <p>Street Lighting & Distribution - 12 years experience</p>
-                    </div>
-                </div>
-
-                <div class="emergency-contacts">
-                    <h4>Emergency Contacts</h4>
-                    <div class="emergency-list">
-                        <div class="emergency-item">
-                            <span class="emergency-label">FOC (Fuse Off Call)</span>
-                            <span class="emergency-number">1912</span>
-                        </div>
-                        <div class="emergency-item">
-                            <span class="emergency-label">Emergency Repair</span>
-                            <span class="emergency-number">9445850811</span>
-                        </div>
-                        <div class="emergency-item">
-                            <span class="emergency-label">T Nagar Office</span>
-                            <span class="emergency-number">044-2434-1101</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Department Board Views - TANGEDCO Chennai EDC -->
-        <div class="view department-view" id="departmentView">
-            <!-- Analytics -->
-            <div class="page active" id="deptAnalytics">
-                <div class="page-header">
-                    <h2>Chennai EDC Analytics</h2>
-                    <p>Circle-wide Electrical Performance Metrics</p>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">2,156</div>
-                        <div class="stat-label">Total Complaints</div>
-                        <div class="stat-trend positive">↑ 8%</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">1,987</div>
-                        <div class="stat-label">Resolved</div>
-                        <div class="stat-trend positive">↑ 12%</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">169</div>
-                        <div class="stat-label">Pending</div>
-                        <div class="stat-trend negative">↓ 5%</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">87%</div>
-                        <div class="stat-label">SLA Compliance</div>
-                        <div class="stat-trend positive">↑ 2%</div>
-                    </div>
-                </div>
-
-                <div class="chart-container" style="position: relative; height: 300px; margin: 20px 0;">
-                    <canvas id="deptChart"></canvas>
-                </div>
-
-                <div class="eb-offices-performance">
-                    <h3>EB Office Performance</h3>
-                    <div class="office-list">
-                        <div class="office-item">
-                            <div class="office-name">T Nagar EB Office</div>
-                            <div class="office-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 91%"></div>
-                                </div>
-                                <span>91%</span>
-                            </div>
-                        </div>
-                        <div class="office-item">
-                            <div class="office-name">Mylapore EB Office</div>
-                            <div class="office-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 88%"></div>
-                                </div>
-                                <span>88%</span>
-                            </div>
-                        </div>
-                        <div class="office-item">
-                            <div class="office-name">Adyar EB Office</div>
-                            <div class="office-progress">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 85%"></div>
-                                </div>
-                                <span>85%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Live Monitor -->
-            <div class="page" id="deptLive">
-                <div class="page-header">
-                    <h2>Live Electrical Monitoring</h2>
-                    <div class="live-indicator">
-                        <span class="pulse-dot"></span>
-                        <span>Real-time TANGEDCO</span>
-                    </div>
-                </div>
-
-                <div class="live-stats">
-                    <div class="live-stat">
-                        <span class="live-number">8</span>
-                        <span class="live-label">New Today</span>
-                    </div>
-                    <div class="live-stat">
-                        <span class="live-number">22</span>
-                        <span class="live-label">In Progress</span>
-                    </div>
-                    <div class="live-stat">
-                        <span class="live-number">5</span>
-                        <span class="live-label">Emergency</span>
-                    </div>
-                </div>
-
-                <div class="live-complaints-list">
-                    <div class="live-complaint new electrical">
-                        <div class="complaint-time">2 min ago</div>
-                        <h4>Voltage Fluctuation - Usman Road</h4>
-                        <p>Severe voltage drops to 180V affecting 85 consumers near Spencer Plaza</p>
-                        <div class="electrical-details">
-                            <span><i class="fas fa-bolt"></i> Power Quality Issue</span>
-                            <span><i class="fas fa-users"></i> 85 consumers affected</span>
-                        </div>
-                        <div class="complaint-actions">
-                            <button class="btn btn--sm btn--primary">Assign Engineer</button>
-                            <button class="btn btn--sm btn--outline">View Details</button>
-                        </div>
-                    </div>
-                    
-                    <div class="live-complaint electrical">
-                        <div class="complaint-time">8 min ago</div>
-                        <h4>Meter Reading Error - Habibullah Road</h4>
-                        <p>Consumer reports abnormally high consumption - requires meter testing</p>
-                        <div class="electrical-details">
-                            <span><i class="fas fa-tachometer-alt"></i> Meter HB4501234</span>
-                            <span><i class="fas fa-user"></i> Consumer: 45012340567</span>
-                        </div>
-                        <div class="complaint-actions">
-                            <button class="btn btn--sm btn--primary">Assign Meter Reader</button>
-                            <button class="btn btn--sm btn--outline">View Details</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Performance -->
-            <div class="page" id="deptPerformance">
-                <div class="page-header">
-                    <h2>TANGEDCO Performance Metrics</h2>
-                </div>
-
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <h4>Resolution Rate</h4>
-                        <div class="kpi-value">92.1%</div>
-                        <div class="kpi-trend positive">+1.8% from last month</div>
-                    </div>
-                    <div class="kpi-card">
-                        <h4>Emergency Response Time</h4>
-                        <div class="kpi-value">45 min</div>
-                        <div class="kpi-trend positive">-15 min from last month</div>
-                    </div>
-                    <div class="kpi-card">
-                        <h4>Customer Satisfaction</h4>
-                        <div class="kpi-value">91%</div>
-                        <div class="kpi-trend positive">+3% from last month</div>
-                    </div>
-                    <div class="kpi-card">
-                        <h4>Power Quality Index</h4>
-                        <div class="kpi-value">87.5%</div>
-                        <div class="kpi-trend negative">-1.2% from last month</div>
-                    </div>
-                </div>
-
-                <div class="performance-charts">
-                    <h3>Monthly Electrical Performance Trends</h3>
-                    <div class="chart-container" style="position: relative; height: 250px;">
-                        <canvas id="performanceChart"></canvas>
-                    </div>
-                </div>
-
-                <div class="infrastructure-status">
-                    <h3>T Nagar Infrastructure Status</h3>
-                    <div class="infrastructure-grid">
-                        <div class="infra-item">
-                            <i class="fas fa-bolt"></i>
-                            <span class="infra-name">Transformers</span>
-                            <span class="infra-status good">3 Active</span>
-                            <span class="infra-detail">1 Overloaded</span>
-                        </div>
-                        <div class="infra-item">
-                            <i class="fas fa-lightbulb"></i>
-                            <span class="infra-name">Street Lights</span>
-                            <span class="infra-status good">221/245 Working</span>
-                            <span class="infra-detail">24 Need Repair</span>
-                        </div>
-                        <div class="infra-item">
-                            <i class="fas fa-home"></i>
-                            <span class="infra-name">Service Connections</span>
-                            <span class="infra-status good">14,835 Active</span>
-                            <span class="infra-detail">45 Pending</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Territory -->
-            <div class="page" id="deptTerritory">
-                <div class="page-header">
-                    <h2>Chennai EDC Territory Map</h2>
-                </div>
-
-                <div class="territory-container">
-                    <div class="mock-territory-map">
-                        <div class="territory-regions">
-                            <div class="territory-region high-activity" style="top: 20%; left: 30%; width: 25%; height: 20%;">
-                                <span class="region-label">T Nagar<br>High Activity</span>
-                            </div>
-                            <div class="territory-region medium-activity" style="top: 50%; left: 60%; width: 30%; height: 25%;">
-                                <span class="region-label">Mylapore<br>Medium Activity</span>
-                            </div>
-                            <div class="territory-region low-activity" style="top: 70%; left: 10%; width: 20%; height: 15%;">
-                                <span class="region-label">Adyar<br>Low Activity</span>
-                            </div>
-                        </div>
-                        <div class="map-overlay">
-                            <p>Chennai EDC Coverage Area</p>
-                            <p>Electrical complaint density heatmap</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="territory-legend">
-                    <h4>Complaint Density (Last 30 Days)</h4>
-                    <div class="density-scale">
-                        <div class="scale-item">
-                            <div class="scale-color low"></div>
-                            <span>Low (1-20)</span>
-                        </div>
-                        <div class="scale-item">
-                            <div class="scale-color medium"></div>
-                            <span>Medium (21-50)</span>
-                        </div>
-                        <div class="scale-item">
-                            <div class="scale-color high"></div>
-                            <span>High (50+)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings -->
-            <div class="page" id="deptSettings">
-                <div class="page-header">
-                    <h2>TANGEDCO Settings</h2>
-                </div>
-
-                <div class="settings-sections">
-                    <div class="settings-section">
-                        <h3>Notification Preferences</h3>
-                        <div class="setting-item">
-                            <span>Emergency Electrical Faults</span>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="setting-item">
-                            <span>Transformer Overload Alerts</span>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="setting-item">
-                            <span>Daily Performance Reports</span>
-                            <label class="toggle">
-                                <input type="checkbox">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3>SLA Configuration</h3>
-                        <div class="form-group">
-                            <label class="form-label">Emergency Response Time (minutes)</label>
-                            <input type="number" class="form-control" value="45">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Street Light Repair SLA (hours)</label>
-                            <input type="number" class="form-control" value="24">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Power Supply Restoration (hours)</label>
-                            <input type="number" class="form-control" value="8">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Communication -->
-            <div class="page" id="deptCommunication">
-                <div class="page-header">
-                    <h2>Communication Hub</h2>
-                    <button class="btn btn--sm btn--primary">New Message</button>
-                </div>
-
-                <div class="communication-tabs">
-                    <button class="tab-btn active" data-tab="internal">TANGEDCO Internal</button>
-                    <button class="tab-btn" data-tab="citizens">Citizens</button>
-                    <button class="tab-btn" data-tab="whatsapp">WhatsApp Updates</button>
-                </div>
-
-                <div class="tab-content active" id="internal">
-                    <div class="message-list">
-                        <div class="message-item urgent">
-                            <div class="message-header">
-                                <strong>Dr. S. Muralidharan - SE Chennai EDC</strong>
-                                <span class="message-time">30 min ago</span>
-                            </div>
-                            <p>Priority alert: Multiple transformer overload reports. Need immediate action plan for Ranganathan Street area.</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--primary">Send Report</button>
-                            </div>
-                        </div>
-                        <div class="message-item">
-                            <div class="message-header">
-                                <strong>AE Ramesh Kumar - Transformer Team</strong>
-                                <span class="message-time">2 hours ago</span>
-                            </div>
-                            <p>Transformer T-NG-15 load testing completed. Requires immediate load balancing. Photos uploaded to system.</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--outline">View Photos</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="citizens">
-                    <div class="message-list">
-                        <div class="message-item">
-                            <div class="message-header">
-                                <strong>M. Rajesh (Consumer: 12304567890)</strong>
-                                <span class="message-time">1 hour ago</span>
-                            </div>
-                            <p>Thank you for fixing the street light on Pondy Bazaar. Much appreciated!</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--outline">Send SMS Update</button>
-                            </div>
-                        </div>
-                        <div class="message-item">
-                            <div class="message-header">
-                                <strong>Shop Owners Association</strong>
-                                <span class="message-time">3 hours ago</span>
-                            </div>
-                            <p>Power cuts affecting business. When will transformer issue be resolved?</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--primary">Send Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="whatsapp">
-                    <div class="whatsapp-info">
-                        <div class="whatsapp-banner">
-                            <i class="fab fa-whatsapp"></i>
-                            <div class="whatsapp-details">
-                                <h4>Chennai TANGEDCO WhatsApp</h4>
-                                <p>9445850829 - For photo complaints and updates</p>
-                            </div>
-                        </div>
-                        <div class="whatsapp-stats">
-                            <div class="whatsapp-stat">
-                                <span class="whatsapp-number">156</span>
-                                <span class="whatsapp-label">Messages Today</span>
-                            </div>
-                            <div class="whatsapp-stat">
-                                <span class="whatsapp-number">42</span>
-                                <span class="whatsapp-label">Photo Complaints</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Central Authority Views - Chennai Corporation -->
-        <div class="view central-view" id="centralView">
-            <!-- City Overview -->
-            <div class="page active" id="centralOverview">
-                <div class="page-header">
-                    <h2>Chennai Corporation Dashboard</h2>
-                    <p>Citywide Electrical Infrastructure Coordination</p>
-                </div>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">15</div>
-                        <div class="stat-label">EB Offices</div>
-                        <div class="stat-change">Under Chennai EDC</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">89%</div>
-                        <div class="stat-label">Infrastructure Health</div>
-                        <div class="stat-change">+2% this quarter</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">2,156</div>
-                        <div class="stat-label">Monthly Complaints</div>
-                        <div class="stat-change">-5% from last month</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">91%</div>
-                        <div class="stat-label">Citizen Satisfaction</div>
-                        <div class="stat-change">+1% this month</div>
-                    </div>
-                </div>
-
-                <div class="department-overview">
-                    <h3>Electrical Infrastructure Coordination</h3>
-                    <div class="dept-cards">
-                        <div class="dept-card electrical">
-                            <div class="dept-header">
-                                <h4>TANGEDCO Chennai EDC</h4>
-                                <span class="dept-status good">87% SLA</span>
-                            </div>
-                            <div class="dept-stats">
-                                <div class="dept-stat">
-                                    <span class="dept-number">169</span>
-                                    <span class="dept-label">Pending</span>
-                                </div>
-                                <div class="dept-stat">
-                                    <span class="dept-number">1.8</span>
-                                    <span class="dept-label">Avg Days</span>
-                                </div>
-                            </div>
-                            <div class="dept-details">
-                                <span><i class="fas fa-bolt"></i> Electrical Supply & Distribution</span>
-                            </div>
-                        </div>
-
-                        <div class="dept-card coordination">
-                            <div class="dept-header">
-                                <h4>Roads & Infrastructure</h4>
-                                <span class="dept-status good">84% SLA</span>
-                            </div>
-                            <div class="dept-stats">
-                                <div class="dept-stat">
-                                    <span class="dept-number">45</span>
-                                    <span class="dept-label">Coord. Issues</span>
-                                </div>
-                                <div class="dept-stat">
-                                    <span class="dept-number">2.1</span>
-                                    <span class="dept-label">Avg Days</span>
-                                </div>
-                            </div>
-                            <div class="dept-details">
-                                <span><i class="fas fa-road"></i> Electric pole installations, Street lighting</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="chart-container" style="position: relative; height: 300px;">
-                    <canvas id="overviewChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Inter-Department -->
-            <div class="page" id="centralInterDept">
-                <div class="page-header">
-                    <h2>Inter-Department Coordination</h2>
-                </div>
-
-                <div class="cross-dept-stats">
-                    <div class="cross-stat">
-                        <span class="cross-number">12</span>
-                        <span class="cross-label">Electrical Coord.</span>
-                    </div>
-                    <div class="cross-stat">
-                        <span class="cross-number">8</span>
-                        <span class="cross-label">Infrastructure</span>
-                    </div>
-                    <div class="cross-stat">
-                        <span class="cross-number">3</span>
-                        <span class="cross-label">Emergency</span>
-                    </div>
-                </div>
-
-                <div class="cross-dept-issues">
-                    <div class="cross-issue-card electrical">
-                        <div class="issue-header">
-                            <div class="issue-id">#CE001</div>
-                            <div class="issue-priority critical">Emergency</div>
-                        </div>
-                        <h4>Cable Damage from Road Construction</h4>
-                        <p>Underground cable damaged during road widening work on Anna Salai. Power cut affecting commercial area.</p>
-                        <div class="involved-depts">
-                            <span class="dept-tag electrical">TANGEDCO</span>
-                            <span class="dept-tag infrastructure">Roads Dept</span>
-                        </div>
-                        <div class="issue-actions">
-                            <button class="btn btn--sm btn--primary">Coordinate</button>
-                            <button class="btn btn--sm btn--outline">Emergency Response</button>
-                        </div>
-                    </div>
-
-                    <div class="cross-issue-card electrical">
-                        <div class="issue-header">
-                            <div class="issue-id">#CE002</div>
-                            <div class="issue-priority high">High</div>
-                        </div>
-                        <h4>Street Light Installation - New Development</h4>
-                        <p>New residential development requires street lighting infrastructure coordination with electrical connections.</p>
-                        <div class="involved-depts">
-                            <span class="dept-tag electrical">TANGEDCO</span>
-                            <span class="dept-tag infrastructure">Corporation</span>
-                            <span class="dept-tag planning">Planning</span>
-                        </div>
-                        <div class="issue-actions">
-                            <button class="btn btn--sm btn--primary">Plan Meeting</button>
-                            <button class="btn btn--sm btn--outline">View Project</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Planning -->
-            <div class="page" id="centralPlanning">
-                <div class="page-header">
-                    <h2>Infrastructure Planning</h2>
-                </div>
-
-                <div class="planning-sections">
-                    <div class="planning-section">
-                        <h3>Electrical Infrastructure Development</h3>
-                        <div class="planning-projects">
-                            <div class="project-card">
-                                <h4>Smart Grid Implementation - Phase 1</h4>
-                                <p>Digital transformation of electrical distribution in T Nagar and Mylapore areas.</p>
-                                <div class="project-meta">
-                                    <span><i class="fas fa-calendar"></i> Q4 2025 - Q2 2026</span>
-                                    <span><i class="fas fa-rupee-sign"></i> ₹45 Crores</span>
-                                </div>
-                                <div class="project-status">
-                                    <span class="status status--info">Planning Phase</span>
-                                </div>
-                            </div>
-                            
-                            <div class="project-card">
-                                <h4>LED Street Light Upgrade</h4>
-                                <p>Complete LED conversion for energy efficiency and smart lighting controls.</p>
-                                <div class="project-meta">
-                                    <span><i class="fas fa-calendar"></i> Q1 2025 - Q3 2025</span>
-                                    <span><i class="fas fa-rupee-sign"></i> ₹12 Crores</span>
-                                </div>
-                                <div class="project-status">
-                                    <span class="status status--warning">In Progress</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="planning-section">
-                        <h3>Budget Allocation - Electrical Works</h3>
-                        <div class="budget-breakdown">
-                            <div class="budget-item">
-                                <span class="budget-category">Emergency Repairs</span>
-                                <span class="budget-allocated">₹8.5 Cr</span>
-                                <span class="budget-utilized">₹6.2 Cr (73%)</span>
-                            </div>
-                            <div class="budget-item">
-                                <span class="budget-category">Infrastructure Upgrade</span>
-                                <span class="budget-allocated">₹25 Cr</span>
-                                <span class="budget-utilized">₹18.7 Cr (75%)</span>
-                            </div>
-                            <div class="budget-item">
-                                <span class="budget-category">New Connections</span>
-                                <span class="budget-allocated">₹12 Cr</span>
-                                <span class="budget-utilized">₹9.8 Cr (82%)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Reports -->
-            <div class="page" id="centralReports">
-                <div class="page-header">
-                    <h2>Electrical Service Reports</h2>
-                </div>
-
-                <div class="report-sections">
-                    <div class="report-section">
-                        <h3>TANGEDCO Performance Reports</h3>
-                        <div class="report-list">
-                            <div class="report-item electrical">
-                                <div class="report-info">
-                                    <h4>Monthly Electrical Performance Report</h4>
-                                    <p>Comprehensive analysis of power supply quality, outage statistics, and customer satisfaction.</p>
-                                    <span class="report-meta">Generated: Sept 20, 2025 | Chennai EDC Circle</span>
-                                </div>
-                                <button class="btn btn--sm btn--outline">Download PDF</button>
-                            </div>
-                            
-                            <div class="report-item electrical">
-                                <div class="report-info">
-                                    <h4>Street Lighting Performance Report</h4>
-                                    <p>LED conversion progress, energy savings, and maintenance statistics across all zones.</p>
-                                    <span class="report-meta">Generated: Sept 20, 2025 | All EB Offices</span>
-                                </div>
-                                <button class="btn btn--sm btn--outline">Download PDF</button>
-                            </div>
-                            
-                            <div class="report-item electrical">
-                                <div class="report-info">
-                                    <h4>Power Quality Assessment</h4>
-                                    <p>Voltage stability, frequency variations, and power factor analysis for industrial areas.</p>
-                                    <span class="report-meta">Generated: Sept 19, 2025 | Technical Assessment</span>
-                                </div>
-                                <button class="btn btn--sm btn--outline">Download PDF</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="report-section">
-                        <h3>Custom Electrical Reports</h3>
-                        <div class="custom-report-form">
-                            <div class="form-group">
-                                <label class="form-label">Report Type</label>
-                                <select class="form-control">
-                                    <option>Complaint Analysis</option>
-                                    <option>Infrastructure Health</option>
-                                    <option>Energy Consumption</option>
-                                    <option>Service Quality Metrics</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Coverage Area</label>
-                                <select class="form-control">
-                                    <option>Entire Chennai EDC</option>
-                                    <option>T Nagar EB Office</option>
-                                    <option>Mylapore EB Office</option>
-                                    <option>Adyar EB Office</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Date Range</label>
-                                <select class="form-control">
-                                    <option>Last 30 days</option>
-                                    <option>Last 3 months</option>
-                                    <option>Last 6 months</option>
-                                    <option>Custom range</option>
-                                </select>
-                            </div>
-                            <button class="btn btn--primary">Generate Electrical Report</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Admin -->
-            <div class="page" id="centralAdmin">
-                <div class="page-header">
-                    <h2>Electrical System Administration</h2>
-                </div>
-
-                <div class="settings-sections">
-                    <div class="settings-section">
-                        <h3>TANGEDCO Integration</h3>
-                        <div class="setting-item">
-                            <span>Real-time data sync with TANGEDCO servers</span>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="setting-item">
-                            <span>Automatic complaint routing to EB offices</span>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="setting-item">
-                            <span>WhatsApp complaint integration</span>
-                            <label class="toggle">
-                                <input type="checkbox" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3>Electrical System Users</h3>
-                        <div class="user-stats">
-                            <div class="user-stat">
-                                <span class="user-count">89</span>
-                                <span class="user-label">EB Office Staff</span>
-                            </div>
-                            <div class="user-stat">
-                                <span class="user-count">15</span>
-                                <span class="user-label">Assistant Engineers</span>
-                            </div>
-                            <div class="user-stat">
-                                <span class="user-count">23</span>
-                                <span class="user-label">Field Technicians</span>
-                            </div>
-                        </div>
-                        <button class="btn btn--primary">Manage TANGEDCO Users</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Communication -->
-            <div class="page" id="centralCommunication">
-                <div class="page-header">
-                    <h2>Communication Hub</h2>
-                    <button class="btn btn--sm btn--primary">New Message</button>
-                </div>
-
-                <div class="communication-tabs">
-                    <button class="tab-btn active" data-tab="internal">TANGEDCO Internal</button>
-                    <button class="tab-btn" data-tab="citizens">Citizens</button>
-                    <button class="tab-btn" data-tab="whatsapp">WhatsApp Updates</button>
-                </div>
-
-                <div class="tab-content active" id="internal">
-                    <div class="message-list">
-                        <div class="message-item urgent">
-                            <div class="message-header">
-                                <strong>Dr. S. Muralidharan - SE Chennai EDC</strong>
-                                <span class="message-time">30 min ago</span>
-                            </div>
-                            <p>Priority alert: Multiple transformer overload reports. Need immediate action plan for Ranganathan Street area.</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--primary">Send Report</button>
-                            </div>
-                        </div>
-                        <div class="message-item">
-                            <div class="message-header">
-                                <strong>AE Ramesh Kumar - Transformer Team</strong>
-                                <span class="message-time">2 hours ago</span>
-                            </div>
-                            <p>Transformer T-NG-15 load testing completed. Requires immediate load balancing. Photos uploaded to system.</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--outline">View Photos</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="citizens">
-                    <div class="message-list">
-                        <div class="message-item">
-                            <div class="message-header">
-                                <strong>M. Rajesh (Consumer: 12304567890)</strong>
-                                <span class="message-time">1 hour ago</span>
-                            </div>
-                            <p>Thank you for fixing the street light on Pondy Bazaar. Much appreciated!</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--outline">Send SMS Update</button>
-                            </div>
-                        </div>
-                        <div class="message-item">
-                            <div class="message-header">
-                                <strong>Shop Owners Association</strong>
-                                <span class="message-time">3 hours ago</span>
-                            </div>
-                            <p>Power cuts affecting business. When will transformer issue be resolved?</p>
-                            <div class="message-actions">
-                                <button class="btn btn--sm btn--outline">Reply</button>
-                                <button class="btn btn--sm btn--primary">Send Update</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="whatsapp">
-                    <div class="whatsapp-info">
-                        <div class="whatsapp-banner">
-                            <i class="fab fa-whatsapp"></i>
-                            <div class="whatsapp-details">
-                                <h4>Chennai TANGEDCO WhatsApp</h4>
-                                <p>9445850829 - For photo complaints and updates</p>
-                            </div>
-                        </div>
-                        <div class="whatsapp-stats">
-                            <div class="whatsapp-stat">
-                                <span class="whatsapp-number">156</span>
-                                <span class="whatsapp-label">Messages Today</span>
-                            </div>
-                            <div class="whatsapp-stat">
-                                <span class="whatsapp-number">42</span>
-                                <span class="whatsapp-label">Photo Complaints</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav" id="bottomNav">
-        <!-- Local Unit Navigation - T Nagar EB Office -->
-        <div class="nav-items local-nav active" id="localNav">
-            <button class="nav-item active" data-page="localDashboard">
-                <i class="fas fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </button>
-            <button class="nav-item" data-page="localComplaints">
-                <i class="fas fa-bolt"></i>
-                <span>Complaints</span>
-            </button>
-            <button class="nav-item" data-page="localFieldWork">
-                <i class="fas fa-hard-hat"></i>
-                <span>Field Work</span>
-            </button>
-            <!-- <button class="nav-item" data-page="localCommunication">
-                <i class="fas fa-comments"></i>
-                <span>Chat</span>
-            </button> -->
-            <button class="nav-item" data-page="localProfile">
-                <i class="fas fa-user-tie"></i>
-                <span>Profile</span>
-            </button>
-        </div>
-
-        <!-- Department Board Navigation - TANGEDCO Chennai EDC -->
-        <div class="nav-items department-nav nav-items-6" id="departmentNav">
-            <button class="nav-item active" data-page="deptAnalytics">
-                <i class="fas fa-chart-line"></i>
-                <span>Analytics</span>
-            </button>
-            <button class="nav-item" data-page="deptLive">
-                <i class="fas fa-wifi"></i>
-                <span>Live Monitor</span>
-            </button>
-            <button class="nav-item" data-page="deptPerformance">
-                <i class="fas fa-trophy"></i>
-                <span>Performance</span>
-            </button>
-            <!-- <button class="nav-item" data-page="deptCommunication">
-                <i class="fas fa-comments"></i>
-                <span>Chat</span>
-            </button> -->
-            <button class="nav-item" data-page="deptTerritory">
-                <i class="fas fa-map-marked-alt"></i>
-                <span>Territory</span>
-            </button>
-            <button class="nav-item" data-page="deptSettings">
-                <i class="fas fa-cog"></i>
-                <span>Settings</span>
-            </button>
-        </div>
-
-        <!-- Central Authority Navigation - Chennai Corporation -->
-        <div class="nav-items central-nav nav-items-6" id="centralNav">
-            <button class="nav-item active" data-page="centralOverview">
-                <i class="fas fa-city"></i>
-                <span>City Overview</span>
-            </button>
-            <button class="nav-item" data-page="centralInterDept">
-                <i class="fas fa-handshake"></i>
-                <span>Inter-Dept</span>
-            </button>
-            <button class="nav-item" data-page="centralPlanning">
-                <i class="fas fa-drafting-compass"></i>
-                <span>Planning</span>
-            </button>
-            <!-- <button class="nav-item" data-page="centralCommunication">
-                <i class="fas fa-comments"></i>
-                <span>Chat</span>
-            </button> -->
-            <button class="nav-item" data-page="centralReports">
-                <i class="fas fa-file-alt"></i>
-                <span>Reports</span>
-            </button>
-            <button class="nav-item" data-page="centralAdmin">
-                <i class="fas fa-tools"></i>
-                <span>Admin</span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Modals and overlays -->
-    <div id="modalOverlay" class="modal-overlay hidden"></div>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- <script src="app.js"></script> -->
-    <script src="app.js"></script>
+            errorElement.classList.remove('hidden');
+            errorTextElement.textContent = message;
+            inputElement.classList.add('error');
+        }
+
+        function hideError(fieldId) {
+            const errorElement = document.getElementById(`${fieldId}Error`);
+            const inputElement = document.getElementById(fieldId);
+            
+            errorElement.classList.add('hidden');
+            inputElement.classList.remove('error');
+        }
+
+        function showGeneralError(message) {
+            generalError.classList.remove('hidden');
+            generalErrorText.textContent = message;
+        }
+
+        function hideGeneralError() {
+            generalError.classList.add('hidden');
+        }
+
+        function validateForm() {
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            let isValid = true;
+
+            // Clear previous errors
+            hideError('email');
+            hideError('password');
+            hideError('username');
+            hideError('confirmPassword');
+            hideGeneralError();
+
+            // Email validation
+            if (!data.email.trim()) {
+                showError('email', 'Email is required');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+                showError('email', 'Please enter a valid email address');
+                isValid = false;
+            }
+
+            // Password validation
+            if (!data.password.trim()) {
+                showError('password', 'Password is required');
+                isValid = false;
+            } else if (data.password.length < 6) {
+                showError('password', 'Password must be at least 6 characters');
+                isValid = false;
+            }
+
+            // Registration specific validations
+            if (!isLogin) {
+                if (!data.username.trim()) {
+                    showError('username', 'Username is required');
+                    isValid = false;
+                } else if (data.username.length < 3) {
+                    showError('username', 'Username must be at least 3 characters');
+                    isValid = false;
+                }
+
+                if (!data.confirmPassword.trim()) {
+                    showError('confirmPassword', 'Please confirm your password');
+                    isValid = false;
+                } else if (data.password !== data.confirmPassword) {
+                    showError('confirmPassword', 'Passwords do not match');
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        function setLoading(loading) {
+            isLoading = loading;
+            submitButton.disabled = loading;
+            toggleButton.disabled = loading;
+            
+            if (loading) {
+                buttonText.classList.add('hidden');
+                loadingContent.classList.remove('hidden');
+                loadingText.textContent = isLogin ? 'Signing In...' : 'Creating Account...';
+            } else {
+                buttonText.classList.remove('hidden');
+                loadingContent.classList.add('hidden');
+            }
+        }
+
+        function toggleMode() {
+            isLogin = !isLogin;
+            
+            // Clear form
+            form.reset();
+            hideError('email');
+            hideError('password');
+            hideError('username');
+            hideError('confirmPassword');
+            hideGeneralError();
+            
+            // Update UI
+            if (isLogin) {
+                subtitle.textContent = 'Integrated Departmental Services';
+                buttonText.textContent = 'Sign In';
+                toggleButton.textContent = 'Sign up';
+                toggleMessage.innerHTML = "Don't have an account? <button type=\"button\" class=\"toggle-button\" id=\"toggleButton\">Sign up</button>";
+                usernameField.classList.add('hidden');
+                confirmPasswordField.classList.add('hidden');
+                additionalLinks.classList.remove('hidden');
+            } else {
+                subtitle.textContent = 'Create your account to get started';
+                buttonText.textContent = 'Create Account';
+                toggleButton.textContent = 'Sign in';
+                toggleMessage.innerHTML = "Already have an account? <button type=\"button\" class=\"toggle-button\" id=\"toggleButton\">Sign in</button>";
+                usernameField.classList.remove('hidden');
+                confirmPasswordField.classList.remove('hidden');
+                additionalLinks.classList.add('hidden');
+            }
+            
+            // Re-bind toggle button event
+            const newToggleButton = document.getElementById('toggleButton');
+            newToggleButton.addEventListener('click', toggleMode);
+        }
+
+        // Event Listeners
+        form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    if (!validateForm() || isLoading) {
+        return;
+    }
+
+    setLoading(true);
+
+    try {
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        let result;
+        
+        if (isLogin) {
+            result = await authAPI.login(data.email, data.password);
+        } else {
+            result = await authAPI.register(data.username, data.email, data.password);
+        }
+
+        if (result.success) {
+            // Store token and user info using our storage utility
+            console.log('Authentication successful:', result);
+            const storage = window.localStorage; // or use sessionStorage based on your requirement
+            storage.setItem('authToken', result.token);
+            storage.setItem('userInfo', JSON.stringify(result.user));
+            
+            // Show success message
+            alert(`${isLogin ? 'Login' : 'Registration'} successful! Welcome to Government Portal.`);
+            
+            // Optional: redirect after successful login
+             window.location.href = 'home.html';
+        } else {
+            showGeneralError(result.message || 'Authentication failed');
+        }
+    } catch (error) {
+        console.error('Authentication error:', error);
+        showGeneralError('Network error. Please check your connection and try again.');
+    } finally {
+        setLoading(false);
+    }
+});
+
+        // Input event listeners to clear errors
+        ['email', 'password', 'username', 'confirmPassword'].forEach(fieldId => {
+            const input = document.getElementById(fieldId);
+            if (input) {
+                input.addEventListener('input', () => {
+                    hideError(fieldId);
+                    hideGeneralError();
+                });
+            }
+        });
+
+        // Password toggle functionality
+        passwordToggle.addEventListener('click', () => {
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+            eyeIcon.classList.toggle('hidden', isPassword);
+            eyeOffIcon.classList.toggle('hidden', !isPassword);
+        });
+
+        confirmPasswordToggle.addEventListener('click', () => {
+            const isPassword = confirmPasswordInput.type === 'password';
+            confirmPasswordInput.type = isPassword ? 'text' : 'password';
+            eyeIcon2.classList.toggle('hidden', isPassword);
+            eyeOffIcon2.classList.toggle('hidden', !isPassword);
+        });
+
+        // Toggle mode button
+        toggleButton.addEventListener('click', toggleMode);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if user is already logged in
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                 window.location.href = 'home.html';
+            }
+        });
+    </script>
 </body>
 </html>
