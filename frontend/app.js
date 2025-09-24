@@ -372,7 +372,7 @@ class ElectricalComplaintApp {
                 </td>
                 <td><span class="priority-badge ${(c.priority || '').toLowerCase()}">${c.priority || ''}</span></td>
                 <td><span class="status status--${(c.status || '').toLowerCase().replace(/\\s/g, '-') }">${c.status || ''}</span></td>
-                <td class="work-order">${c.workOrderId || ''}</td>
+                <td class="work-order">${c.workOrderNumber || ''}</td>
                 <td>
                     <button class="btn btn--sm btn--primary">Update</button>
                 </td>
