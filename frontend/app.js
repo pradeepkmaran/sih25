@@ -264,36 +264,36 @@ class ElectricalComplaintApp {
     async fetchAllDataFromAPI() {
         try {
             // Complaints
-            const complaintsRes = await fetch('http://localhost:3000/api/complaints');
+            const complaintsRes = await fetch('https://sih25-api.vercel.app/api/complaints');
             if (!complaintsRes.ok) throw new Error('Failed to fetch complaints');
             this.data.complaints = await complaintsRes.json();
 
             // Staff
-            // const staffRes = await fetch('http://localhost:3000/api/staff');
+            // const staffRes = await fetch('https://sih25-api.vercel.app/api/staff');
             // if (staffRes.ok) {
             //     this.data.staff = await staffRes.json();
             // }
 
             // // Infrastructure
-            // const infraRes = await fetch('http://localhost:3000/api/infrastructure');
+            // const infraRes = await fetch('https://sih25-api.vercel.app/api/infrastructure');
             // if (infraRes.ok) {
             //     this.data.infrastructure = await infraRes.json();
             // }
 
             // // Performance
-            // const perfRes = await fetch('http://localhost:3000/api/performance');
+            // const perfRes = await fetch('https://sih25-api.vercel.app/api/performance');
             // if (perfRes.ok) {
             //     this.data.performance = await perfRes.json();
             // }
 
             // // Emergency Contacts
-            // const contactsRes = await fetch('http://localhost:3000/api/emergencyContacts');
+            // const contactsRes = await fetch('https://sih25-api.vercel.app/api/emergencyContacts');
             // if (contactsRes.ok) {
             //     this.data.emergencyContacts = await contactsRes.json();
             // }
 
             // Work Orders
-            const workOrdersRes = await fetch('http://localhost:3000/api/workorders');
+            const workOrdersRes = await fetch('https://sih25-api.vercel.app/api/workorders');
             if (workOrdersRes.ok) {
                 this.data.workOrders = await workOrdersRes.json();
             }
